@@ -1,0 +1,55 @@
+---
+interface Props {
+  name: string
+  logoPath: string
+  url: string
+  twitter?: string
+}
+
+const { name, logoPath, url, twitter } = Astro.props
+const twitterUrl = 'https://twitter.com/' + twitter
+---
+
+<div
+  class="player-block col-lg-4 col-md-6 col-sm-12 wow fadeInLeft"
+  data-wow-delay="0ms"
+>
+  <div class="inner-box hvr-bob">
+    <div class="sponsor-background">
+      <a href={url}><img src={logoPath} alt="" /></a>
+    </div>
+    <div class="lower-content">
+      <h3><a href={url}>{name}</a></h3>
+      <div class="level">
+        <slot />
+      </div>
+      <ul class="social-icons">
+        {
+          twitter && (
+            <li>
+              <a href={twitterUrl}>
+                <span class="fab fa-twitter" />
+              </a>
+            </li>
+          )
+        }
+        {
+          url && (
+            <li>
+              <a href={url}>
+                <span class="fas fa-globe" />
+              </a>
+            </li>
+          )
+        }
+      </ul>
+    </div>
+  </div>
+</div>
+
+<style>
+  .sponsor-background {
+    background-color: white;
+    display: inline-block; /* Adjust display type as needed */
+  }
+</style>
