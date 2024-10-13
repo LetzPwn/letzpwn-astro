@@ -1,0 +1,140 @@
+---
+// Access the current path from the Astro object
+const currentPath = Astro.url.pathname
+
+// Define your menu items
+const menuItems = [
+  { name: 'Home', path: '/' },
+  { name: 'About Us', path: '/about.html' },
+  { name: 'News', path: '/news.html' },
+  { name: 'Sponsors', path: '/sponsors.html' },
+  { name: 'Writeups', path: '/writeups.html' },
+  { name: 'Contact', path: '/contact.html' }
+]
+---
+
+<header class="main-header">
+  <!-- Header Top -->
+  <div class="header-top">
+    <div class="auto-container clearfix">
+      <div class="top-left clearfix">
+        <ul class="info-list">
+          <li>The first Luxembourgish CTF Team</li>
+        </ul>
+      </div>
+
+      <div class="top-right">
+        <ul class="social-icons">
+          <li>
+            <a href="https://twitter.com/LetzPwnAsbl"
+              ><span class="fab fa-twitter"></span></a>
+          </li>
+          <li>
+            <a href="https://discord.gg/Qjt5zUc"
+              ><span class="fab fa-discord"></span></a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- Header Upper -->
+  <div class="header-upper">
+    <div class="inner-container">
+      <div class="auto-container clearfix">
+        <!--Logo-->
+        <div class="logo-outer">
+          <div class="logo">
+            <a href="/"
+              ><img
+                src="/assets/images/logo.png"
+                alt=""
+                title="LetzPwn"
+                style="max-width: 260px;"
+              /></a
+            >
+          </div>
+        </div>
+
+        <!--Nav Box-->
+        <div class="nav-outer clearfix">
+          <!--Mobile Navigation Toggler-->
+          <div class="mobile-nav-toggler">
+            <span class="icon flaticon-menu-1"></span>
+          </div>
+
+          <!-- Main Menu -->
+          <nav class="main-menu navbar-expand-md navbar-light">
+            <div
+              class="collapse navbar-collapse show clearfix"
+              id="navbarSupportedContent"
+            >
+              <!-- Left Navigation -->
+              <ul class="navigation clearfix pull-left">
+                {
+                  menuItems.slice(0, 3).map((item) => (
+                    <li class={currentPath === item.path ? 'current' : ''}>
+                      <a href={item.path}>{item.name}</a>
+                    </li>
+                  ))
+                }
+              </ul>
+              <!-- Right Navigation -->
+              <ul class="navigation clearfix pull-right">
+                {
+                  menuItems.slice(3).map((item) => (
+                    <li class={currentPath === item.path ? 'current' : ''}>
+                      <a href={item.path}>{item.name}</a>
+                    </li>
+                  ))
+                }
+              </ul>
+            </div>
+          </nav>
+          <!-- Main Menu End-->
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--End Header Upper-->
+
+  <!-- Sticky Header  -->
+  <div class="sticky-header">
+    <div class="auto-container clearfix">
+      <!--Logo-->
+      <div class="logo pull-left">
+        <a href="/" title=""
+          ><img
+            src="/assets/images/logo.png"
+            style="max-width:100px;"
+            alt=""
+            title=""
+          /></a
+        >
+      </div>
+      <!--Right Col-->
+      <div class="pull-right">
+        <!-- Main Menu -->
+        <nav class="main-menu clearfix">
+          <!--Keep This Empty / Menu will come through Javascript-->
+        </nav>
+        <!-- Main Menu End-->
+      </div>
+    </div>
+  </div>
+  <!-- End Sticky Menu -->
+
+  <!-- Mobile Menu  -->
+  <div class="mobile-menu">
+    <div class="menu-backdrop"></div>
+    <div class="close-btn"><span class="icon flaticon-close"></span></div>
+
+    <nav class="menu-box">
+      <div class="nav-logo">
+        <a href="/"><img src="/assets/images/logo.png" alt="" title="" /></a>
+      </div>
+      <div class="menu-outer"></div>
+    </nav>
+  </div>
+  <!-- End Mobile Menu -->
+</header>
