@@ -1,0 +1,67 @@
+---
+export interface Props {
+  title: string
+  excerpt?: string
+  author: string
+  date: string
+  tags?: string[]
+  url: string
+  coverImagePath?: string
+}
+
+const { title, excerpt, author, url, date, tags, coverImagePath } = Astro.props
+---
+
+<div
+  class="player-block col-lg-4 col-md-6 col-sm-12 wow fadeInLeft"
+  data-wow-delay="0ms"
+>
+  <div class="inner-box hvr-bob fixed-height-box">
+    <div class="sponsor-background">
+      <a href={url}><img src={coverImagePath} alt="" /></a>
+    </div>
+    <div class="lower-content">
+      <h3><a href={url}>{title}</a></h3>
+      <div class="level">
+        <p>{excerpt}</p>
+        <p>{author}</p>
+        <p>{date}</p>
+      </div>
+      <ul class="social-icons">
+        {
+          url &&
+            tags.map((tag) => (
+              <li>
+                <a href={'/tags/' + tag}>{tag}</a>
+              </li>
+            ))
+        }
+      </ul>
+    </div>
+  </div>
+</div>
+
+<style>
+  .fixed-height-box {
+    border: 3px solid #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    height: 650px; /* Set a fixed height */
+    overflow: hidden; /* Prevent content overflow */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; /* Distribute space between child elements */
+  }
+
+  .sponsor-background {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+
+  .lower-content {
+    padding: 15px;
+    height: 250px;
+    background-color: #f8f9fa;
+    overflow: auto; /* Allows scrolling if content overflows */
+  }
+</style>
