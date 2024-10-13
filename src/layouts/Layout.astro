@@ -1,0 +1,118 @@
+---
+import Header from '../components/Header.astro'
+import Footer from '../components/Footer.astro'
+
+import { Breadcrumbs } from 'astro-breadcrumbs'
+
+import 'astro-breadcrumbs/breadcrumbs.css'
+
+interface Props {
+  title: string
+  background?: string
+  subtitle?: string
+  extra?: string
+}
+
+function getDefaultBackground(bg: string) {
+  return bg || '/assets/images/background/1.png' // Simple example
+}
+
+const { title, background, subtitle, extra } = Astro.props
+
+const effectiveBackground = getDefaultBackground(background)
+const renderBreadcrumbs = subtitle.length == 0
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="description" content="Astro description" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="stylesheet" href="/assets/css/bootstrap.css" />
+    <link rel="stylesheet" href="/assets/css/style.css" />
+    <link rel="stylesheet" href="/assets/css/responsive.css" />
+    <link rel="stylesheet" href="/assets/css/import_custom.css" />
+
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+    <link rel="icon" href="/favicon.ico" type="image/x-icon" />
+
+    <meta name="generator" content={Astro.generator} />
+    <title>LetzPwn - Luxembourgish CTF Team</title>
+  </head>
+  <body>
+    <Header />
+    <section
+      class="page-banner"
+      style={`background-image: url(${effectiveBackground});`}
+    >
+      <div class="auto-container">
+        {
+          !renderBreadcrumbs && (
+            <div class="sec-title centered">
+              <div class="title">{subtitle}</div>
+            </div>
+          )
+        }
+        {
+          renderBreadcrumbs && (
+            <div class="inner-container clearfix">
+              <div class="bread-crumb clearfix">
+                <Breadcrumbs>
+                  <svg
+                    slot="separator"
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <polyline points="9 18 15 12 9 6" />
+                  </svg>
+                </Breadcrumbs>
+              </div>
+            </div>
+          )
+        }
+
+        <h1>{title}</h1>
+
+        {extra && <h4>{extra}</h4>}
+      </div>
+    </section>
+    <slot />
+    <Footer />
+  </body>
+</html>
+<style is:global>
+  :root {
+    --accent: 136, 58, 234;
+    --accent-light: 224, 204, 250;
+    --accent-dark: 49, 10, 101;
+    --accent-gradient: linear-gradient(
+      45deg,
+      rgb(var(--accent)),
+      rgb(var(--accent-light)) 30%,
+      white 60%
+    );
+  }
+  html {
+    font-family: system-ui, sans-serif;
+    background: #13151a;
+  }
+  code {
+    font-family:
+      Menlo,
+      Monaco,
+      Lucida Console,
+      Liberation Mono,
+      DejaVu Sans Mono,
+      Bitstream Vera Sans Mono,
+      Courier New,
+      monospace;
+  }
+</style>
