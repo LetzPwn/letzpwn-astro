@@ -1,0 +1,33 @@
+---
+interface Props {
+  name: string
+  pseudo: string
+  image?: string
+  role?: string
+}
+
+const { name, pseudo, role, image } = Astro.props
+---
+
+<div
+  class="player-block col-lg-4 col-md-6 col-sm-12 wow fadeInLeft"
+  data-wow-delay="0ms"
+>
+  <div class="inner-box hvr-bob">
+    <div class="sponsor-background">
+      <img src={image} alt="" />
+    </div>
+    <div class="lower-content">
+      <h3>{name}</h3>
+
+      <h6>{pseudo}</h6>
+      <div class="level">
+        <slot />
+      </div>
+
+      <div class="social-icons centered">
+        <h5>{role}</h5>
+      </div>
+    </div>
+  </div>
+</div>
