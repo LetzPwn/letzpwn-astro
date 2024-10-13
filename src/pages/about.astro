@@ -1,0 +1,191 @@
+---
+import Layout from '../layouts/Layout.astro'
+import TeamMember from '../components/TeamMember.astro'
+---
+
+<Layout title="LetzPwn - Luxembourgish CTF Team" subtitle="About Us">
+  <main>
+    <!-- Description Section -->
+    <section></section>
+
+    <!-- FAQ/Goals Section -->
+    <section class="faq-section" style="padding-top: 40px;">
+      <div class="auto-container">
+        <div class="sec-title centered">
+          <h2>Our goals</h2>
+        </div>
+        <div class="inner-container clearfix">
+          <!-- Column -->
+          <div class="column col-lg-6 col-md-12 col-sm-12">
+            <!-- Question Block -->
+            <div class="question-block-two">
+              <div class="inner-box">
+                <div class="icon-box">
+                  <span class="icon flaticon-growth"></span>
+                </div>
+                <h3>Spread awareness about CTF's and recruit new members</h3>
+                <div class="text">
+                  The CTF community is still very small in Luxembourg. It is
+                  important to continuously spread awareness and recruit new
+                  members to stand a chance in global competitions and represent
+                  Luxembourg in the best possible way. We will try our best to
+                  find ways to contact and integrate new members: on social
+                  media, asking friends, at events, ...
+                </div>
+              </div>
+            </div>
+
+            <!-- Question Block -->
+            <div class="question-block-two">
+              <div class="inner-box">
+                <div class="icon-box">
+                  <span class="icon flaticon-question"></span>
+                </div>
+                <h3>
+                  Help and Train members in Cybersecurity & CTF challenges
+                </h3>
+                <div class="text">
+                  On the discord channel, members will find resources and guides
+                  from other members on how to get started. They'll be able to
+                  ask questions to the other members if they’re stuck or need
+                  some guidance on how to proceed. The aim is to participate in
+                  online CTFs as much as possible (currently doing about 2 to 3
+                  per month on weekends) so that the newbies can try to apply
+                  the knowledge they’ve acquired in a safe and judgement-free
+                  environment, with the bonus of moving the team forward if they
+                  manage to solve something. During online CTFs the team is
+                  collaborating in the discord server.
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Column -->
+          <div class="column col-lg-6 col-md-12 col-sm-12">
+            <!-- Question Block Two -->
+            <div class="question-block-two alternate">
+              <div class="inner-box">
+                <div class="icon-box">
+                  <span class="icon flaticon-plan"></span>
+                </div>
+                <h3>Participate in CTFs</h3>
+                <div class="text">
+                  One of the main purposes of the community is to participate in
+                  CTFs. Our end goal is to strengthen the team's pratical
+                  hacking skills and the being able to represent Luxembourg as a
+                  real competitor in relevant CTF events.
+                </div>
+              </div>
+            </div>
+
+            <!-- Question Block -->
+            <div class="question-block-two alternate">
+              <div class="inner-box">
+                <div class="icon-box">
+                  <span class="icon flaticon-calendar"></span>
+                </div>
+                <h3>Meetups and Workshops</h3>
+                <div class="text">
+                  Additionally to online CTF events, we'd like to organize
+                  meetups throughout the year to compete in CTFs while working
+                  together in a physical space. Furthermore, depending on which
+                  resources we have at our disposition, we'd love to organize
+                  workshops with experts to further develop our knowledge.
+                </div>
+              </div>
+            </div>
+
+            <!-- Question Block -->
+            <div class="question-block-two alternate">
+              <div class="inner-box">
+                <div class="icon-box">
+                  <span class="icon flaticon-award"></span>
+                </div>
+                <h3>European Cyber Security Challenge (ECSC)</h3>
+                <div class="text">
+                  The ECSC is a CTF, where European countries are competing
+                  against each other. Thus every participating country puts
+                  together a team of maximum 10 members (5 juniors, 5 seniors).
+                  2019 was the first participating year for Luxembourg. In 2020,
+                  we want to assemble another team. If you are between 15 and 25
+                  years old and are a Luxembourgish resident, this might be of
+                  interest for you. The first step to participate in the ECSC is
+                  to contact us as soon as possible, and we will happily provide
+                  you with further details. Usually, the ECSC takes place in
+                  autumn, however the qualification often starts 6-9 months
+                  prior. The results of the Luxembourg Cyber Security Challenge
+                  determines the team selection for the ECSC. Thereafter,
+                  workshops/tutoring sessions with experts from SMILE are
+                  organized to prepare the team for the ECSC. If you missed the
+                  qualification, there might be a small change that you can
+                  still participate, so feel free to contact us :)
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Team Members Section -->
+
+    <section class="players-section players-page-section">
+      <div class="auto-container">
+        <div class="sec-title centered">
+          <h2>Board & Founders</h2>
+        </div>
+        <div class="row clearfix">
+          <TeamMember name="Mike" pseudo="punshLineLama" role="President">
+            DOESN'T KNOW HOW TO BUILD A WEBSITE
+          </TeamMember>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div
+        class="auto-container"
+        style="display: flex; flex-direction: column;align-items: center;"
+      >
+        <div class="sec-title centered">
+          <h2>Statuts / Bylaws</h2>
+        </div>
+        <a
+          href="https://gd.lu/rcsl/5N9Vh3"
+          download
+          class="theme-btn btn-style-one"
+        >
+          <i class="fas fa-file"></i>
+        </a>
+        <h5 style="padding: 20px" class="centered">Download our bylaws here</h5>
+      </div>
+    </section>
+  </main>
+  <style>
+    /* Style for the button */
+    .theme-btn.btn-style-one {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 150px; /* Adjust width for the size */
+      height: 150px; /* Adjust height to make it square */
+      background-color: #059ccf; /* Change to your preferred color */
+      color: #ffffff; /* Text color */
+      text-decoration: none; /* Remove underline from link */
+      border: none;
+      border-radius: 10px; /* Optional: to make slightly rounded corners */
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    /* Icon size */
+    .theme-btn.btn-style-one i {
+      font-size: 80px; /* Increase font size to fill the button */
+    }
+
+    /* Button hover effect */
+    .theme-btn.btn-style-one:hover {
+      background-color: #007bb5; /* Darker shade for hover effect */
+    }
+  </style>
+</Layout>
