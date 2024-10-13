@@ -16,6 +16,22 @@ git clone --recurse-submodules https://github.com/LetzPwn/letzpwn-astro.git
 
 Any static assets, like images, can be placed in the `public/` directory.
 
+## Adding a new post
+
+Add this to the mdx file:
+
+```md
+---
+slug: "my-first-news-post"
+title: "My First News Post"
+date: "2024-10-01"
+author: "John Doe"
+coverImagePath: "/assets/logo.png"
+tags: ["update", "announcement"]
+---
+
+``
+
 ## 🧞 Commands
 
 All commands are run from the root of the project, from a terminal:
