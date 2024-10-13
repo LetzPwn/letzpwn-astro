@@ -1,0 +1,94 @@
+---
+const year = new Date().getFullYear()
+---
+
+<footer class="main-footer">
+  <div class="auto-container">
+    <!-- Widgets Section -->
+    <div class="widgets-section">
+      <div class="row clearfix">
+        <!-- Logo Column -->
+        <div class="column col-lg-4 col-md-6 col-sm-12">
+          <div class="footer-widget logo-widget">
+            <div class="logo">
+              <a href="/index.html"
+                ><img src="/assets/images/logo.png" alt="LetzPwn Logo" /></a
+              >
+            </div>
+          </div>
+        </div>
+        <!-- Links Column -->
+        <div class="column col-lg-4 col-md-6 col-sm-12">
+          <div class="footer-widget links-widget">
+            <div class="widget-content">
+              <div class="footer-title">
+                <h2>Links</h2>
+              </div>
+              <div class="row clearfix">
+                <div class="column col-lg-6 col-md-6 col-sm-12">
+                  <ul class="list">
+                    <li><a href="/about">About</a></li>
+                    <li><a href="/team">Our Team</a></li>
+                    <li><a href="/news">News</a></li>
+                  </ul>
+                </div>
+                <div class="column col-lg-6 col-md-6 col-sm-12">
+                  <ul class="list">
+                    <li><a href="/contact">Contact</a></li>
+                    <li><a href="/privacy_policy">Privacy Policy</a></li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Other columns can go here -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer Bottom -->
+  <div class="footer-bottom">
+    <div class="auto-container">
+      <!--Scroll to top-->
+      <div class="scroll-to-top scroll-to-target" data-target="html">
+        <span class="flaticon-up-arrow"></span>
+      </div>
+      <!--Scroll to top-->
+      <div class="row clearfix">
+        <!-- Copyright Column -->
+        <div class="column col-lg-6 col-md-12 col-sm-12">
+          <div class="copyright">&copy; {year} All Rights Reserved</div>
+        </div>
+        <!-- Social Icons Column -->
+        <div class="column col-lg-6 col-md-12 col-sm-12">
+          <ul class="social-icons">
+            <li>
+              <a href="https://twitter.com/LetzPwnAsbl"
+                ><span class="fab fa-twitter"></span></a>
+            </li>
+            <li>
+              <a href="https://discord.gg/Qjt5zUc"
+                ><span class="fab fa-discord"></span></a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  //Get the button
+  let scrollTop = document.getElementsByClassName('scroll-to-top')[0]
+
+  // When the user scrolls down 20px from the top of the document, show the button
+
+  // When the user clicks on the button, scroll to the top of the document
+  scrollTop.addEventListener('click', backToTop)
+
+  function backToTop() {
+    document.body.scrollTop = 0
+    document.documentElement.scrollTop = 0
+  }
+</script>
