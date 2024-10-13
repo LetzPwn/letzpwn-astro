@@ -1,0 +1,38 @@
+{
+  "name": "",
+  "type": "module",
+  "version": "0.0.1",
+  "scripts": {
+    "dev": "astro dev",
+    "start": "astro dev",
+    "build": "astro check && tsc --noEmit && astro build",
+    "check": "astro check && npm run prettier:debug-check",
+    "preview": "astro preview",
+    "prepare": "husky install",
+    "astro": "astro",
+    "prettier:check": "prettier --cache --check --plugin-search-dir=. .",
+    "prettier:debug-check": "prettier --cache --debug-check --plugin-search-dir=. .",
+    "format": "prettier --cache --write --plugin-search-dir=. ."
+  },
+  "dependencies": {
+    "@astrojs/check": "^0.9.3",
+    "@astrojs/mdx": "^3.1.7",
+    "@types/node": "^22.7.4",
+    "astro": "^4.13.1",
+    "astro-breadcrumbs": "^2.3.1",
+    "prettier-plugin-astro": "^0.14.1",
+    "sharp-ico": "^0.1.5",
+    "typescript": "^5.6.2"
+  },
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^8.8.0",
+    "@typescript-eslint/parser": "^8.8.0",
+    "eslint": "^8.57.1",
+    "eslint-plugin-import": "^2.30.0",
+    "eslint-plugin-prettier": "^5.2.1",
+    "husky": "^9.1.6",
+    "lint-staged": "^15.2.10",
+    "prettier": "^3.3.3",
+    "stylelint": "^16.9.0"
+  }
+}
