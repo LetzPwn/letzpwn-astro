@@ -1,0 +1,47 @@
+---
+import Layout from '../../layouts/Layout.astro'
+import PostMini from '../../components/PostMini.astro'
+import type { Props as PostMiniProps } from '../../components/PostMini.astro'
+
+const newsPosts = import.meta.glob('../../content/news/*.mdx', { eager: true })
+const posts: PostMiniProps[] = Object.entries(newsPosts).map(
+  ([path, module]) => {
+    const mod = module as { frontmatter: PostMiniProps } // Use type assertion
+    const slug = path.split('/').pop()?.replace('.mdx', '') || ''
+
+    return {
+      title: mod.frontmatter.title,
+      coverImagePath: mod.frontmatter.coverImagePath,
+      tags: mod.frontmatter.tags,
+      author: mod.frontmatter.author,
+      date: mod.frontmatter.date,
+      excerpt: mod.frontmatter.excerpt,
+      url: '/news/' + slug
+    }
+  }
+)
+---
+
+<Layout title="Latest News" subtitle="News">
+  <main>
+    <section class="players-section players-page-section">
+      <div class="auto-container">
+        <div class="row clearfix">
+          {
+            posts.map((post) => (
+              <PostMini
+                title={post.title}
+                url={post.url}
+                excerpt={post.excerpt}
+                coverImagePath={post.coverImagePath}
+                tags={post.tags}
+                author={post.author}
+                date={post.date}
+              />
+            ))
+          }
+        </div>
+      </div>
+    </section>
+  </main>
+</Layout>

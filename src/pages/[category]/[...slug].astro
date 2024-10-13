@@ -1,0 +1,50 @@
+---
+import PostLayout from '../../layouts/PostLayout.astro'
+import type { Props as PostMiniProps } from '../../components/PostMini.astro'
+
+interface MDXModule {
+  frontmatter: PostMiniProps
+  Content: any // or a specific type if you know it
+}
+
+// Import all markdown files from both the "news" and "writeups" directories
+const contentModules = import.meta.glob('../../content/{news,writeups}/*.mdx', {
+  eager: true
+})
+
+export async function getStaticPaths() {
+  const contentModules = import.meta.glob(
+    '../../content/{news,writeups}/*.mdx',
+    { eager: true }
+  )
+
+  const paths = Object.keys(contentModules).map((filePath) => {
+    // Extract the category (news or writeups) and slug from the file path
+    const pathParts = filePath.split('/')
+    const category = pathParts[pathParts.length - 2]
+    const slug = pathParts[pathParts.length - 1].replace('.mdx', '')
+
+    return {
+      params: { category, slug }
+    }
+  })
+
+  return paths
+}
+
+const { category, slug } = Astro.params
+
+// Find the content module that matches the current category and slug
+const contentKey = `../../content/${category}/${slug}.mdx`
+const content = contentModules[contentKey] as MDXModule
+
+if (!content) {
+  throw new Error(`Post not found for category: ${category}, slug: ${slug}`)
+}
+
+const { Content, frontmatter } = content
+---
+
+<PostLayout frontmatter={frontmatter}>
+  <Content />
+</PostLayout>
