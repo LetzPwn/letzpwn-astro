@@ -1,0 +1,91 @@
+---
+import Layout from '../layouts/Layout.astro'
+---
+
+<Layout title="Contact Us" subtitle="Get in Touch">
+  <main class="contact-section">
+    <div class="auto-container">
+      <div class="contact-options">
+        <p>
+          If you have any questions or want to connect, feel free to reach out
+          through any of the following:
+        </p>
+
+        <div class="contact-blocks">
+          <div class="contact-block">
+            <h1 class="fas fa-envelope"></h1>
+            <h4><a href="mailto:info@letzpwn.lu">info@letzpwn.lu</a></h4>
+          </div>
+          <div class="contact-block">
+            <h1 class="fab fa-discord"></h1>
+            <h4>
+              <a
+                href="https://discord.gg/your-discord-server"
+                target="_blank"
+                rel="noopener noreferrer">Join our Discord Server</a>
+            </h4>
+          </div>
+          <div class="contact-block">
+            <h1 class="fab fa-twitter"></h1>
+            <h4>
+              <a
+                href="https://twitter.com/LetzPwnAsbl"
+                target="_blank"
+                rel="noopener noreferrer">@LetzPwnAsbl</a>
+            </h4>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+</Layout>
+
+<style>
+  .contact-section {
+    padding: 4rem 0;
+    background-color: #202020;
+  }
+  .contact-options {
+    text-align: center;
+    max-width: 1000px;
+    margin: 0 auto;
+    color: #3786ff;
+  }
+  .contact-options h4,
+  p {
+    font-size: 1.2rem;
+    margin-bottom: 2rem;
+    color: #fff;
+  }
+  .contact-blocks {
+    display: grid;
+    grid-template-columns: 1fr; /* Default to single column */
+    gap: 2rem;
+  }
+  /* Make blocks side-by-side on very large screens */
+  @media (min-width: 1200px) {
+    .contact-blocks {
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    }
+  }
+  .contact-block {
+    padding: 1.5rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    background-color: #2a2a2a;
+  }
+  .contact-block h3 {
+    font-size: 1.8rem;
+    margin-bottom: 0.5rem;
+  }
+  .contact-block p {
+    font-size: 1.1rem;
+  }
+  .contact-block a {
+    color: var(--accent-dark);
+    text-decoration: none;
+  }
+  .contact-block a:hover {
+    text-decoration: underline;
+  }
+</style>
