@@ -36,7 +36,7 @@
 
 **********************************************/
 
-/*** 
+/***
 
 ====================================================================
             Fonts
@@ -60,7 +60,7 @@ font-family: 'Roboto Condensed', sans-serif;
 @import url('scrollbar.css');
 @import url('hover.css');
 
-/*** 
+/***
 
 ====================================================================
     Reset
@@ -77,7 +77,7 @@ font-family: 'Roboto Condensed', sans-serif;
     line-height: inherit;
 }
 
-/*** 
+/***
 
 ====================================================================
     Global Settings
@@ -86,7 +86,7 @@ font-family: 'Roboto Condensed', sans-serif;
  ***/
 
 body {
-    
+
     font-size:14px;
     color:#787878;
     line-height:1.6em;
@@ -119,7 +119,7 @@ h1,h2,h3,h4,h5,h6 {
 }
 
 textarea{
-    overflow:hidden;    
+    overflow:hidden;
 }
 
 button{
@@ -131,7 +131,7 @@ p,.text{
     font-size: 16px;
     line-height: 30px;
     font-weight: 400;
-    color: #696478;
+/*    color: #696478;*/
     margin: 0;
 }
 
@@ -158,7 +158,7 @@ p,.text{
 ul,li{
     list-style:none;
     padding:0px;
-    margin:0px; 
+    margin:0px;
 }
 
 figure{
@@ -532,36 +532,36 @@ figure{
     float: left;
 }
 
-.preloader{ 
-    position:fixed; 
-    left:0px; 
-    top:0px; 
-    width:100%; 
-    height:100%; 
-    z-index:999999; 
-    background-color:rgba(0,0,0,0); 
-} 
+.preloader{
+    position:fixed;
+    left:0px;
+    top:0px;
+    width:100%;
+    height:100%;
+    z-index:999999;
+    background-color:rgba(0,0,0,0);
+}
 
-.preloader .icon{ 
-    position:fixed; 
-    left:0px; 
-    top:0px; 
-    width:100%; 
-    height:100%; 
-    z-index:1; 
-    background-color:rgba(0,0,0,0); 
-    background-position:center center; 
-    background-repeat:no-repeat; 
+.preloader .icon{
+    position:fixed;
+    left:0px;
+    top:0px;
+    width:100%;
+    height:100%;
+    z-index:1;
+    background-color:rgba(0,0,0,0);
+    background-position:center center;
+    background-repeat:no-repeat;
     background-image:url(../images/icons/preloader.svg);
     -webkit-transition: all 200ms ease;
     -moz-transition: all 200ms ease;
     -ms-transition: all 200ms ease;
     -o-transition: all 200ms ease;
     transition: all 200ms ease;
-} 
+}
 
 .page-loaded .preloader .icon{
-    opacity:0; 
+    opacity:0;
 }
 
 .preloader:before{
@@ -572,7 +572,7 @@ figure{
     width:100%;
     height:100%;
     background:#ffffff;
-    z-index:0; 
+    z-index:0;
     -webkit-transform:translateX(0%);
     -ms-transform:translateX(0%);
     transform:translateX(0%);
@@ -597,7 +597,7 @@ figure{
     width:100%;
     height:100%;
     background:#3786ff;
-    z-index:2; 
+    z-index:2;
     -webkit-transform:translateX(101%);
     -ms-transform:translateX(101%);
     transform:translateX(101%);
@@ -617,7 +617,7 @@ figure{
 img{
     display:inline-block;
     max-width:100%;
-    height:auto;    
+    height:auto;
 }
 
 .dropdown-toggle::after{
@@ -628,7 +628,7 @@ img{
     line-height: inherit;
 }
 
-/*** 
+/***
 
 ====================================================================
     Main Header style
@@ -909,7 +909,7 @@ img{
 
 .main-menu .navigation > li > ul.from-right{
     left:auto;
-    right:0px;  
+    right:0px;
 }
 
 .main-menu .navigation > li > ul > li{
@@ -919,7 +919,7 @@ img{
 }
 
 .main-menu .navigation > li > ul > li:last-child{
-    border-bottom:none; 
+    border-bottom:none;
 }
 
 .main-menu .navigation > li > ul > li:before{
@@ -939,7 +939,7 @@ img{
 }
 
 .main-menu .navigation > li > ul > li:hover:before{
-    width:100%; 
+    width:100%;
 }
 
 .main-menu .navigation > li > ul > li > a{
@@ -982,7 +982,7 @@ img{
     font-size:16px;
     font-weight:800;
     text-align:center;
-    z-index:5;  
+    z-index:5;
 }
 
 .main-menu .navigation > li > ul > li > ul{
@@ -1009,7 +1009,7 @@ img{
 
 .main-menu .navigation > li > ul > li > ul.from-right{
     left:auto;
-    right:0px;  
+    right:0px;
 }
 
 .main-menu .navigation > li > ul > li > ul > li{
@@ -1019,7 +1019,7 @@ img{
 }
 
 .main-menu .navigation > li > ul > li > ul > li:last-child{
-    border-bottom:none; 
+    border-bottom:none;
 }
 
 .main-menu .navigation > li > ul > li > ul > li:before{
@@ -1039,11 +1039,11 @@ img{
 }
 
 .main-menu .navigation > li > ul > li > ul > li:hover:before{
-    width:100%; 
+    width:100%;
 }
 
 .main-menu .navigation > li > ul > li > ul > li:last-child{
-    border-bottom:none; 
+    border-bottom:none;
 }
 
 .main-menu .navigation > li > ul > li > ul > li > a{
@@ -1077,7 +1077,7 @@ img{
     line-height:24px;
     font-size:16px;
     font-weight:900;
-    z-index:5;  
+    z-index:5;
 }
 
 .main-menu .navigation > li.dropdown:hover > ul{
@@ -1107,7 +1107,7 @@ img{
     -moz-transition:all 300ms ease;
     -webkit-transition:all 500ms ease;
     -ms-transition:all 300ms ease;
-    -o-transition:all 300ms ease;   
+    -o-transition:all 300ms ease;
 }
 
 .main-menu .navigation li.dropdown .dropdown-btn{
@@ -1193,7 +1193,7 @@ img{
     left: auto !important;
     right: 0;
     padding:0px;
-    width:280px;    
+    width:280px;
     border-radius:0px;
     -webkit-transform: none !important;
     -ms-transform: none !important;
@@ -1202,12 +1202,12 @@ img{
 }
 
 .main-header .search-panel .form-container{
-    padding:25px 20px;  
+    padding:25px 20px;
 }
 
 .main-header .search-panel .form-group{
     position:relative;
-    margin:0px; 
+    margin:0px;
 }
 
 .main-header .search-panel input[type="text"],
@@ -1221,12 +1221,12 @@ img{
     height:40px;
     font-size:14px;
     border:1px solid #e0e0e0;
-    background:#ffffff; 
+    background:#ffffff;
 }
 
 .main-header .search-panel input:focus,
 .main-header .search-panel select:focus{
-    border-color:#25262c;   
+    border-color:#25262c;
 }
 
 .main-header .search-panel .search-btn{
@@ -1259,7 +1259,7 @@ img{
     content: "";
 }
 
-/*** 
+/***
 
 ====================================================================
     Header Style Two
@@ -1312,7 +1312,7 @@ img{
 /* .header-style-two .main-menu,
 .header-style-two .nav-outer{
     width: 100%;
-} 
+}
 
 .header-style-two .main-menu .navbar-collapse{
     display: block !important;
@@ -1363,7 +1363,7 @@ img{
     color: #3786ff;
 } */
 
-/*** 
+/***
 
 ====================================================================
                 Sticky Header
@@ -1441,7 +1441,7 @@ img{
     color: #3786ff;
 }
 
-/*** 
+/***
 
 ====================================================================
             Mobile Menu
@@ -1473,13 +1473,13 @@ img{
 }
 
 .mobile-menu .navbar-collapse{
-    display:block !important;   
+    display:block !important;
 }
 
 .mobile-menu .nav-logo{
     position:relative;
     padding:30px 25px;
-    text-align:left;    
+    text-align:left;
 }
 
 .mobile-menu-visible{
@@ -1619,7 +1619,7 @@ img{
     -moz-transition: all 500ms ease;
     -ms-transition: all 500ms ease;
     -o-transition: all 500ms ease;
-    transition: all 500ms ease; 
+    transition: all 500ms ease;
 }
 
 .mobile-menu .navigation li ul li > a{
@@ -1639,12 +1639,12 @@ img{
     -moz-transition: all 500ms ease;
     -ms-transition: all 500ms ease;
     -o-transition: all 500ms ease;
-    transition: all 500ms ease; 
+    transition: all 500ms ease;
 }
 
 .mobile-menu .navigation li.current > a,
 .mobile-menu .navigation li > a:hover{
-    color:#3786ff;  
+    color:#3786ff;
 }
 
 .mobile-menu .navigation li.current > a:before{
@@ -1668,15 +1668,15 @@ img{
     -moz-transition: all 500ms ease;
     -ms-transition: all 500ms ease;
     -o-transition: all 500ms ease;
-    transition: all 500ms ease; 
+    transition: all 500ms ease;
     z-index:5;
 }
 
 .mobile-menu .navigation li.dropdown .dropdown-btn.open{
-    background:#3786ff; 
+    background:#3786ff;
     -webkit-transform:rotate(90deg);
     -ms-transform:rotate(90deg);
-    transform:rotate(90deg);    
+    transform:rotate(90deg);
 }
 
 .mobile-menu .navigation li > ul,
@@ -1705,15 +1705,15 @@ img{
     -moz-transition: all 500ms ease;
     -ms-transition: all 500ms ease;
     -o-transition: all 500ms ease;
-    transition: all 500ms ease; 
+    transition: all 500ms ease;
 }
 
 .mobile-menu .social-links li a:hover{
-    color:#3786ff;  
+    color:#3786ff;
 }
 
 
-/*** 
+/***
 
 ====================================================================
         Section Title
@@ -1752,7 +1752,7 @@ img{
     color: #ffffff;
 }
 
-/*** 
+/***
 
 ====================================================================
         Banner Section
@@ -1963,7 +1963,7 @@ img{
 }
 
 .banner-section:hover .owl-nav{
-    opacity:1;  
+    opacity:1;
 }
 
 .banner-section .owl-nav .owl-prev{
@@ -1973,7 +1973,7 @@ img{
     height: 80px;
     width: 40px;
     border-radius: 0;
-    border: 2px solid #ffffff; 
+    border: 2px solid #ffffff;
     text-align: center;
     line-height: 80px;
     color: #020202;
@@ -1994,7 +1994,7 @@ img{
     height: 80px;
     width: 40px;
     border-radius: 0;
-    border: 2px solid #ffffff; 
+    border: 2px solid #ffffff;
     text-align: center;
     line-height: 80px;
     color: #020202;
@@ -2008,7 +2008,7 @@ img{
     transition: all 300ms ease;
 }
 
-.banner-section .owl-nav .owl-prev:hover, 
+.banner-section .owl-nav .owl-prev:hover,
 .banner-section .owl-nav .owl-next:hover{
     opacity: 1;
 }
@@ -2058,7 +2058,7 @@ img{
 .banner-title{
     font-size:45px !important;
 }
-/*** 
+/***
 
 ====================================================================
     Welcome Section
@@ -2096,7 +2096,7 @@ img{
 
 .default-portfolio-item .image-box{
     position:relative;
-    display:block;  
+    display:block;
     margin-bottom:0px;
 }
 
@@ -2135,7 +2135,7 @@ img{
     -ms-transform:scaleX(1);
     -o-transform:scaleX(1);
     -moz-transform:scaleX(1);
-    transform:scaleX(1);    
+    transform:scaleX(1);
 }
 
 .default-portfolio-item .overlay-inner{
@@ -2196,7 +2196,7 @@ img{
     margin-bottom:40px;
 }
 
-/*** 
+/***
 
 ====================================================================
     Gallery Section
@@ -2467,7 +2467,7 @@ img{
     display:inline-block;
 }
 
-/*** 
+/***
 
 ====================================================================
     Matches Section
@@ -2517,7 +2517,7 @@ img{
 
 .matches-section .matches-tabs .tab-btns .tab-btn span{
     position:relative;
-    z-index:1;  
+    z-index:1;
 }
 
 .matches-section .matches-tabs .tab-btns .tab-btn:before{
@@ -2530,12 +2530,12 @@ img{
     background:#3786ff;
     -webkit-transition:all 500ms ease;
     -ms-transition:all 500ms ease;
-    transition:all 500ms ease;  
+    transition:all 500ms ease;
 }
 
 .matches-section .matches-tabs .tab-btns .tab-btn:hover:before,
 .matches-section .matches-tabs .tab-btns .tab-btn.active-btn:before{
-    width:100%; 
+    width:100%;
 }
 
 .matches-section .matches-tabs .tab-btns .tab-btn:hover,
@@ -2554,7 +2554,7 @@ img{
 }
 
 .matches-section .matches-tabs .tabs-content .tab.active-tab{
-    display:block;  
+    display:block;
 }
 
 .matches-section .matches-tabs .matches-block{
@@ -2703,7 +2703,7 @@ img{
 }
 
 .matches-block:hover .match-item .inner-item .product{
-    background:#0c0a0a; 
+    background:#0c0a0a;
 }
 
 /* Match Item */
@@ -2899,7 +2899,7 @@ img{
     background-color:#ffffff;
 }
 
-/*** 
+/***
 
 ====================================================================
     Questions Section
@@ -3023,7 +3023,7 @@ img{
     position:relative;
 }
 
-/*** 
+/***
 
 ====================================================================
     Call To Action Section
@@ -3212,10 +3212,10 @@ img{
     letter-spacing:2px;
     text-transform:uppercase;
     margin-top:40px;
-    
+
 }
 
-/*** 
+/***
 
 ====================================================================
     News Section
@@ -3259,7 +3259,7 @@ img{
     opacity:0.70;
     -webkit-transform:scale(1.05);
     -ms-transform:scale(1.05);
-    transform:scale(1.05);  
+    transform:scale(1.05);
 }
 
 .news-block .inner-box .lower-content{
@@ -3317,7 +3317,7 @@ img{
     color:#3786ff;
 }
 
-/*** 
+/***
 
 ====================================================================
     Sponsors Section
@@ -3371,7 +3371,7 @@ img{
     opacity:1;
 }
 
-/*** 
+/***
 
 ====================================================================
     Main Footer
@@ -3559,7 +3559,7 @@ img{
 }
 
 
-/*** 
+/***
 
 ====================================================================
     Scroll To Top style
@@ -3595,7 +3595,7 @@ img{
     color:#3786ff;
 }
 
-/*** 
+/***
 
 ====================================================================
     Games Section
@@ -3628,11 +3628,11 @@ img{
 }
 
 .games-block .inner-box:hover .btn-style-two .btn-title{
-    color:#ffffff;  
+    color:#ffffff;
 }
 
 .games-block .inner-box:hover .btn-style-two:before{
-    background:#ffffff; 
+    background:#ffffff;
 }
 
 .games-block .inner-box .image{
@@ -3678,7 +3678,7 @@ img{
     color:#3786ff;
 }
 
-/*** 
+/***
 
 ====================================================================
     Welcome Section Two
@@ -3745,7 +3745,7 @@ img{
     max-width:inherit;
 }
 
-/*** 
+/***
 
 ====================================================================
     Players Section
@@ -3763,7 +3763,7 @@ img{
 }
 
 .players-page-section{
-    padding:115px 0px 60px; 
+    padding:115px 0px 60px;
 }
 
 .players-page-section .player-block{
@@ -3787,7 +3787,7 @@ img{
 }
 
 .player-block .inner-box:hover .image{
-    border-color:#3786ff;   
+    border-color:#3786ff;
 }
 
 .player-block .inner-box .image img{
@@ -3868,7 +3868,7 @@ img{
     color:#3786ff;
 }
 
-/*** 
+/***
 
 ====================================================================
     Call To Action Section
@@ -3999,7 +3999,7 @@ img{
     text-transform:uppercase;
 }
 
-/*** 
+/***
 
 ====================================================================
     Contact Form Section
@@ -4138,7 +4138,7 @@ img{
     color:#ffffff;
 }
 
-/*** 
+/***
 
 ====================================================================
         Page Banner
@@ -4173,7 +4173,7 @@ img{
 .page-banner .bread-crumb {
     position: relative;
     display: inline-block;
-    
+
 }
 
 .page-banner .bread-crumb li{
@@ -4211,10 +4211,10 @@ img{
 }
 
 .page-banner .bread-crumb li a:hover{
-    color:#3786ff;  
+    color:#3786ff;
 }
 
-/*** 
+/***
 
 ====================================================================
     About Section
@@ -4250,7 +4250,7 @@ img{
 
 .about-section .lower-content .column{
     position:relative;
-    margin-bottom:20px; 
+    margin-bottom:20px;
 }
 
 .about-section .lower-content h3{
@@ -4268,7 +4268,7 @@ img{
     line-height:1.8em;
 }
 
-/*** 
+/***
 
 ====================================================================
     Faq's Section
@@ -4423,7 +4423,7 @@ img{
 
 
 
-/*** 
+/***
 
 ====================================================================
         Match Single
@@ -4451,7 +4451,7 @@ img{
     font-weight: 400;
     text-transform:uppercase;
     letter-spacing: 0.05em;
-    
+
     margin-bottom: 15px;
 }
 
@@ -4558,7 +4558,7 @@ img{
     height: auto;
 }
 
-/*** 
+/***
 
 ====================================================================
         News Section Style Two
@@ -4575,7 +4575,7 @@ img{
     margin-bottom: 60px;
 }
 
-/*** 
+/***
 
 ====================================================================
         Blog Detail
@@ -4688,7 +4688,7 @@ img{
 }
 
 .blog-detail .post-info li a:hover{
-    color:#ffffff;  
+    color:#ffffff;
 }
 
 .blog-detail .lower-content p{
@@ -4709,7 +4709,7 @@ img{
 .post-share-options .tags{
     position: relative;
     display: inline-block;
-    
+
 }
 
 .post-share-options .tags li{
@@ -4756,7 +4756,7 @@ img{
 }
 
 .post-share-options .tags li a:hover{
-    color:#ffffff;  
+    color:#ffffff;
 }
 
 .post-share-options .social-links{
@@ -4909,7 +4909,7 @@ img{
 
 .sidebar .search-box .form-group{
     position:relative;
-    margin:0px; 
+    margin:0px;
 }
 
 .sidebar .search-box .form-group input[type="text"],
@@ -5327,7 +5327,7 @@ img{
     width: 100%;
 }
 
-/*** 
+/***
 
 ====================================================================
         Comment Area
@@ -5431,7 +5431,7 @@ img{
     color: #3786ff;
 }
 
-/*** 
+/***
 
 ====================================================================
         Comment Form
@@ -5494,7 +5494,7 @@ img{
 .comment-form ::-moz-input-placeholder{color: #6c6d70;}
 .comment-form ::-ms-input-placeholder{color: #6c6d70;}
 
-/*** 
+/***
 
 ====================================================================
         Player Info Section
@@ -5509,12 +5509,12 @@ img{
 
 .player-info-section .image-column{
     position:relative;
-    margin-bottom:30px; 
+    margin-bottom:30px;
 }
 
 .player-info-section .image-column .inner{
     position:relative;
-    display:block;  
+    display:block;
 }
 
 .player-info-section .text-column{
@@ -5527,7 +5527,7 @@ img{
     position:relative;
     display:block;
     padding-left: 30px;
-    padding-top:70px;   
+    padding-top:70px;
 }
 
 .player-info-section .text-column .title-box{
@@ -5585,7 +5585,7 @@ img{
 }
 
 
-/*** 
+/***
 
 ====================================================================
     Awards Section
@@ -5632,7 +5632,7 @@ img{
     opacity:0.80;
 }
 
-/*** 
+/***
 
 ====================================================================
     Gallery Section Three
@@ -5645,7 +5645,7 @@ img{
     padding:120px 0px 90px;
 }
 
-/*** 
+/***
 
 ====================================================================
     Map Section Style
