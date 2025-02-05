@@ -30,7 +30,7 @@ coverImagePath: "/assets/logo.png"
 tags: ["update", "announcement"]
 ---
 
-``
+```
 
 ## 🧞 Commands
 
