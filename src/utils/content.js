@@ -27,6 +27,9 @@ export function getAllTags() {
 
     files.forEach((file) => {
       const filePath = path.join(categoryDir, file)
+      if (fs.lstatSync(filePath).isDirectory()) {
+        return
+      }
       const fileContent = fs.readFileSync(filePath, 'utf-8')
       const { data: frontmatter } = matter(fileContent)
 
