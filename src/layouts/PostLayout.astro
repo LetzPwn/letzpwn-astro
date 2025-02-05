@@ -13,12 +13,9 @@ const { frontmatter, children } = Astro.props
   <div class="content-container">
     <!-- Main content area (2/3 of the width) -->
     <article class="main-content">
-      <header>
-        <h1>{frontmatter.title}</h1>
-        <p>{frontmatter.date}</p>
-      </header>
+      <br />
       <main>
-        {children}
+        <slot />
       </main>
     </article>
 
@@ -43,11 +40,17 @@ const { frontmatter, children } = Astro.props
   .content-container {
     display: flex;
     padding: 30px;
+    color: white;
     gap: 20px; /* Spacing between main content and sidebar */
+  }
+
+  p {
+    color: white;
   }
 
   .main-content {
     flex: 2; /* Takes up 2/3 of the container */
+    color: white;
   }
 
   .sidebar {

@@ -41,10 +41,9 @@ const content = contentModules[contentKey] as MDXModule
 if (!content) {
   throw new Error(`Post not found for category: ${category}, slug: ${slug}`)
 }
-
 const { Content, frontmatter } = content
 ---
 
-<PostLayout frontmatter={frontmatter}>
+<PostLayout frontmatter={frontmatter} Content={content}>
   <Content />
 </PostLayout>
