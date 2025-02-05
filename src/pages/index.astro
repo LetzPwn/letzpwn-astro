@@ -20,7 +20,8 @@ const posts: PostMiniProps[] = Object.entries(newsModules)
     return {
       ...mod.frontmatter,
       Content: mod.Content,
-      slug: slug
+      slug: slug,
+      url: '/news/' + slug
     }
   })
   .filter((post) => post.date) // Ensure posts have a date in their frontmatter
@@ -38,7 +39,8 @@ const writeups: PostMiniProps[] = Object.entries(writeupModules)
     return {
       ...mod.frontmatter,
       Content: mod.Content,
-      slug: slug
+      slug: slug,
+      url: '/writeups/' + slug
     }
   })
   .filter((post) => post.date) // Ensure posts have a date in their frontmatter
