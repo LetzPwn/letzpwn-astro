@@ -1,0 +1,22 @@
+---
+export interface Props {
+  tagName: string
+}
+
+const { tagName } = Astro.props
+---
+
+<a style="color: white" class="tag-button" href={`/tags/${tagName}`}>
+  {tagName}
+</a>
+
+<style>
+  .tag-button {
+    display: inline-block;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    padding: 5px 10px;
+    background-color: #007bff;
+    text-decoration: none;
+  }
+</style>

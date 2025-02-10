@@ -1,0 +1,50 @@
+---
+import Layout from '../../layouts/Layout.astro'
+import { slugify } from '../../utils/slugify'
+
+const newsPosts = import.meta.glob('../../content/news/*.mdx', { eager: true })
+const writeupPosts = import.meta.glob('../../content/writeups/*.mdx', {
+  eager: true
+})
+
+// Extract posts from news and writeups
+const allPosts = [...Object.values(newsPosts), ...Object.values(writeupPosts)]
+
+// Collect tags from all posts
+const tagMap = new Map<string, number>()
+
+allPosts.forEach((mod) => {
+  const frontmatter = (mod as { frontmatter: { tags?: string[] } }).frontmatter
+  if (frontmatter.tags) {
+    frontmatter.tags.forEach((tag) => {
+      tagMap.set(tag, (tagMap.get(tag) || 0) + 1)
+    })
+  }
+})
+
+const tags = Array.from(tagMap.entries()).map(([tag, count]) => ({
+  tag,
+  count
+}))
+---
+
+<Layout title="Tags" subtitle="Browse by Tags">
+  <main>
+    <section>
+      <div class="auto-container">
+        <h2>All Tags</h2>
+        <ul>
+          {
+            tags.map(({ tag, count }) => (
+              <li>
+                <a href={`/tags/${slugify(tag)}`}>
+                  {tag} ({count})
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+    </section>
+  </main>
+</Layout>

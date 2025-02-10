@@ -1,0 +1,121 @@
+---
+import Layout from '../../layouts/Layout.astro'
+import PostMini from '../../components/PostMini.astro'
+import type { Props as PostMiniProps } from '../../components/PostMini.astro'
+import { slugify } from '../../utils/slugify'
+
+const newsPosts = import.meta.glob('../../content/news/*.mdx', { eager: true })
+const writeupPosts = import.meta.glob('../../content/writeups/*.mdx', {
+  eager: true
+})
+
+const allPosts = [...Object.entries(newsPosts), ...Object.entries(writeupPosts)]
+
+// Collect all tags and map them to posts
+const tagMap = new Map<string, PostMiniProps[]>()
+
+for (const [path, module] of allPosts) {
+  const mod = module as { frontmatter: PostMiniProps }
+  const slug = path.split('/').pop()?.replace('.mdx', '') || ''
+
+  const post: PostMiniProps = {
+    title: mod.frontmatter.title,
+    coverImagePath: mod.frontmatter.coverImagePath,
+    tags: mod.frontmatter.tags,
+    author: mod.frontmatter.author,
+    date: mod.frontmatter.date,
+    excerpt: mod.frontmatter.excerpt,
+    url: path.includes('/news/') ? `/news/${slug}` : `/writeups/${slug}`
+  }
+
+  if (mod.frontmatter.tags) {
+    mod.frontmatter.tags.forEach((tag) => {
+      const slugTag = slugify(tag)
+      if (!tagMap.has(slugTag)) {
+        tagMap.set(slugTag, [])
+      }
+      tagMap.get(slugTag)!.push(post)
+    })
+  }
+}
+
+// Define getStaticPaths at the top
+export function getStaticPaths() {
+  const newsPosts = import.meta.glob('../../content/news/*.mdx', {
+    eager: true
+  })
+  const writeupPosts = import.meta.glob('../../content/writeups/*.mdx', {
+    eager: true
+  })
+  const allPosts = [
+    ...Object.entries(newsPosts),
+    ...Object.entries(writeupPosts)
+  ]
+
+  // Collect all tags and map them to posts
+  const tagMap = new Map<string, PostMiniProps[]>()
+
+  for (const [path, module] of allPosts) {
+    const mod = module as { frontmatter: PostMiniProps }
+    const slug = path.split('/').pop()?.replace('.mdx', '') || ''
+
+    const post: PostMiniProps = {
+      title: mod.frontmatter.title,
+      coverImagePath: mod.frontmatter.coverImagePath,
+      tags: mod.frontmatter.tags,
+      author: mod.frontmatter.author,
+      date: mod.frontmatter.date,
+      excerpt: mod.frontmatter.excerpt,
+      url: path.includes('/news/') ? `/news/${slug}` : `/writeups/${slug}`
+    }
+
+    if (mod.frontmatter.tags) {
+      mod.frontmatter.tags.forEach((tag) => {
+        const slugTag = slugify(tag)
+        if (!tagMap.has(slugTag)) {
+          tagMap.set(slugTag, [])
+        }
+        tagMap.get(slugTag)!.push(post)
+      })
+    }
+  }
+
+  return Array.from(tagMap.keys()).map((tag) => ({
+    params: { tag }
+  }))
+}
+
+// Get the current tag from URL params
+const { tag } = Astro.params
+const filteredPosts = tagMap.get(tag) || []
+---
+
+<Layout
+  title={`Tag: ${decodeURIComponent(tag)}`}
+  subtitle={`Posts tagged "${decodeURIComponent(tag)}"`}
+>
+  <main>
+    <section>
+      <div class="auto-container">
+        <br />
+        {
+          filteredPosts.length > 0 ? (
+            filteredPosts.map((post) => (
+              <PostMini
+                title={post.title}
+                url={post.url}
+                excerpt={post.excerpt}
+                coverImagePath={post.coverImagePath}
+                tags={post.tags}
+                author={post.author}
+                date={post.date}
+              />
+            ))
+          ) : (
+            <p>No articles found for this tag.</p>
+          )
+        }
+      </div>
+    </section>
+  </main>
+</Layout>
