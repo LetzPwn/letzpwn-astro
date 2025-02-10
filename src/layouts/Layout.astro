@@ -21,6 +21,10 @@ const { title, background, subtitle, extra } = Astro.props
 
 const effectiveBackground = getDefaultBackground(background)
 const renderBreadcrumbs = subtitle.length == 0
+
+const baseUrl = Astro.site ?? Astro.url
+const cleanPathname = Astro.url.pathname.replace(/\.html$/, '')
+const defaultCanonicalUrl = new URL(cleanPathname + Astro.url.search, baseUrl)
 ---
 
 <!doctype html>
@@ -33,6 +37,8 @@ const renderBreadcrumbs = subtitle.length == 0
     <link rel="stylesheet" href="/assets/css/style.css" />
     <link rel="stylesheet" href="/assets/css/responsive.css" />
     <link rel="stylesheet" href="/assets/css/import_custom.css" />
+    <link rel="sitemap" href="/sitemap-index.xml" />
+    <link rel="canonical" href={defaultCanonicalUrl} />
 
     <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
     <link rel="icon" href="/favicon.ico" type="image/x-icon" />
