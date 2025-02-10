@@ -5,19 +5,21 @@ import Footer from '../components/Footer.astro'
 import { Breadcrumbs } from 'astro-breadcrumbs'
 
 import 'astro-breadcrumbs/breadcrumbs.css'
+import TagButton from '../components/TagButton.astro'
 
 interface Props {
   title: string
   background?: string
   subtitle?: string
   extra?: string
+  tags?: string[]
 }
 
 function getDefaultBackground(bg: string) {
   return bg || '/assets/images/background/1.png' // Simple example
 }
 
-const { title, background, subtitle, extra } = Astro.props
+const { title, background, subtitle, extra, tags } = Astro.props
 
 const effectiveBackground = getDefaultBackground(background)
 const renderBreadcrumbs = subtitle.length == 0
@@ -88,6 +90,8 @@ const defaultCanonicalUrl = new URL(cleanPathname + Astro.url.search, baseUrl)
         <h1>{title}</h1>
 
         {extra && <h4>{extra}</h4>}
+        <br />
+        {tags && tags.map((tag) => <TagButton tagName={tag} />)}
       </div>
     </section>
     <slot />

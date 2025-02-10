@@ -1,47 +1,41 @@
 ---
 import Layout from './Layout.astro'
-import type { Props as PostMiniProps } from '../components/PostMini.astro'
 
 const { frontmatter } = Astro.props
+const dateOptions: object = {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric'
+}
+
+const formattedPublishDate = new Date(frontmatter.date).toLocaleDateString(
+  navigator.languages[0],
+  dateOptions
+)
 ---
 
 <Layout
   title={frontmatter.title}
   subtitle="News"
-  extra={`By ${frontmatter.author} - ${frontmatter.date}`}
+  extra={`By ${frontmatter.author} - ${formattedPublishDate}`}
+  tags={frontmatter.tags}
 >
   <div class="content-container">
-    <!-- Main content area (2/3 of the width) -->
     <article class="main-content">
       <br />
       <main>
         <slot />
       </main>
     </article>
-
-    <!-- Sidebar (1/3 of the width) -->
-    <aside class="sidebar">
-      <section class="tags">
-        <h3 class="centered">Tags</h3>
-
-        {
-          frontmatter.tags.map((tag: PostMiniProps) => (
-            <a style="color: white" class="tag-button" href={`/tags/${tag}`}>
-              {tag}
-            </a>
-          ))
-        }
-      </section>
-    </aside>
   </div>
 </Layout>
 
 <style>
   .content-container {
-    display: flex;
-    padding: 30px;
+    padding: 3vh 10vw;
     color: white;
     gap: 20px; /* Spacing between main content and sidebar */
+    text-align: justify;
   }
 
   p {
@@ -51,43 +45,5 @@ const { frontmatter } = Astro.props
   .main-content {
     flex: 2; /* Takes up 2/3 of the container */
     color: white;
-  }
-
-  .sidebar {
-    flex: 1; /* Takes up 1/3 of the container */
-    padding: 15px;
-    border-radius: 8px;
-    border: #828282 1px solid;
-  }
-
-  .tag-button {
-    display: inline-block;
-    margin-right: 10px;
-    margin-bottom: 10px;
-    padding: 5px 10px;
-    background-color: #007bff;
-    text-decoration: none;
-  }
-
-  .tags,
-  .recommended-posts {
-    margin-bottom: 20px;
-  }
-
-  .tags ul,
-  .recommended-posts ul {
-    list-style: none;
-    padding: 0;
-  }
-
-  .tags li,
-  .recommended-posts li {
-    margin-bottom: 10px;
-  }
-
-  .tags a,
-  .recommended-posts a {
-    text-decoration: none;
-    color: #007bff;
   }
 </style>

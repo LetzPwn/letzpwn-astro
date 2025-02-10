@@ -8,8 +8,18 @@ export interface Props {
   url: string
   coverImagePath?: string
 }
+
 const { title, excerpt, author, url, date, tags, coverImagePath } = Astro.props
-console.log(url)
+const dateOptions: object = {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric'
+}
+
+const formattedPublishDate = new Date(date).toLocaleDateString(
+  navigator.languages[0],
+  dateOptions
+)
 ---
 
 <div
@@ -25,7 +35,7 @@ console.log(url)
       <div class="level">
         <p>{excerpt}</p>
         <p>{author}</p>
-        <p>{date}</p>
+        <p>{formattedPublishDate}</p>
       </div>
       <ul class="social-icons">
         {
