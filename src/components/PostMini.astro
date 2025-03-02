@@ -1,25 +1,36 @@
 ---
+import { Image } from "astro:assets"
+
 export interface Props {
-  title: string
-  excerpt?: string
-  author: string
-  date: string
-  tags?: string[]
-  url: string
-  coverImagePath?: string
+  title: string;
+  excerpt?: string;
+  author: string;
+  date: string; // Ensure `date` is always a string
+  tags?: string[];
+  url: string;
+  coverImagePath?: any;
 }
 
-const { title, excerpt, author, url, date, tags, coverImagePath } = Astro.props
-const dateOptions: object = {
-  year: 'numeric',
-  month: 'long',
-  day: 'numeric'
-}
+const { title, excerpt, author, url, tags, coverImagePath } = Astro.props;
+let date = Astro.props.date ?? "Unknown Date"; // Ensure `date` is always a string
+// Define date formatting options correctly
+const dateOptions: Intl.DateTimeFormatOptions = {
+  year: "numeric",
+  month: "long",
+  day: "numeric",
+};
 
-const formattedPublishDate = new Date(date).toLocaleDateString(
-  'en-DE',
-  dateOptions
-)
+// Ensure `date` is correctly parsed only if it's in valid "YYYY-MM-DD" format
+const parsedDate =
+  date && /^\d{4}-\d{2}-\d{2}$/.test(date)
+    ? new Date(date + "T00:00:00Z") // Append "T00:00:00Z" to ensure correct parsing
+    : null;
+
+// Convert to formatted string
+const formattedPublishDate =
+  parsedDate && !isNaN(parsedDate.getTime())
+    ? parsedDate.toLocaleDateString("en-US", dateOptions) // "February 20, 2020"
+    : "Unknown Date";
 ---
 
 <div
@@ -28,25 +39,25 @@ const formattedPublishDate = new Date(date).toLocaleDateString(
 >
   <div class="inner-box hvr-bob fixed-height-box">
     <div class="sponsor-background">
-      <a href={url}><img src={coverImagePath} alt="" /></a>
+      <a href={url}><img style="height:300px; overflow:hidden;object-fit:cover;width:auto;" src={coverImagePath.src} alt="" /></a>
     </div>
     <div class="lower-content">
-      <h3><a href={url}>{title}</a></h3>
-      <div class="level">
-        <p>{excerpt}</p>
-        <p>{author}</p>
-        <p>{formattedPublishDate}</p>
+      <div class="post-content">
+        <h3><a href={url}>{title}</a></h3>
+        {excerpt && <p class="excerpt">{excerpt}</p>}
       </div>
-      <ul class="social-icons">
-        {
-          url &&
-            tags.map((tag) => (
+      <div class="post-footer">
+        <p class="author-date">{author} • {formattedPublishDate}</p>
+        {tags && tags.length > 0 && (
+          <ul class="social-icons">
+            {tags.map((tag) => (
               <li>
                 <a href={'/tags/' + tag}>{tag}</a>
               </li>
-            ))
-        }
-      </ul>
+            ))}
+          </ul>
+        )}
+      </div>
     </div>
   </div>
 </div>
@@ -70,8 +81,54 @@ const formattedPublishDate = new Date(date).toLocaleDateString(
 
   .lower-content {
     padding: 15px;
-    height: 250px;
+    height: 360px;
     background-color: #f8f9fa;
-    overflow: auto; /* Allows scrolling if content overflows */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; /* Keeps footer at the bottom */
+  }
+
+  .post-content {
+    flex-grow: 1; /* Allows title & excerpt to expand */
+    overflow: hidden;
+  }
+
+  .post-footer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    text-align: center;
+  }
+
+  .author-date {
+    font-size: 14px;
+    color: #555;
+  }
+
+  .excerpt {
+    font-size: 14px;
+    color: #333;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .social-icons {
+    display: flex;
+    gap: 8px;
+    padding: 0;
+    list-style: none;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .social-icons li {
+    display: inline;
+  }
+
+  .social-icons a {
+    text-decoration: none;
+    color: #059ccf;
+    font-size: 14px;
   }
 </style>

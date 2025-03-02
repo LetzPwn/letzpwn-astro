@@ -4,25 +4,32 @@ import Layout from '../../layouts/Layout.astro'
 import PostMini from '../../components/PostMini.astro'
 import type { Props as PostMiniProps } from '../../components/PostMini.astro'
 
-const newsPosts = import.meta.glob('../../content/writeups/*.mdx', {
-  eager: true
-})
-const posts: PostMiniProps[] = Object.entries(newsPosts).map(
+const images = import.meta.glob<{ default: string }>('/src/content/writeups/**/*.{png,jpg,jpeg}', { eager: true });
+const writedups = import.meta.glob('../../content/writeups/*.mdx', { eager: true})
+const posts: PostMiniProps[] = Object.entries(writedups).map(
   ([path, module]) => {
     const mod = module as { frontmatter: PostMiniProps } // Use type assertion
     const slug = path.split('/').pop()?.replace('.mdx', '') || ''
 
+    // Ensure the date is properly formatted as a string before passing it
+    const rawDate = mod.frontmatter.date
+    const parsedDate = rawDate ? new Date(`${rawDate}T00:00:00Z`) : null;
+    const coverImage = images[`/src/content/writeups/${mod.frontmatter.coverImagePath}`]?.default || images[`/src/content/writeups/img/logo.png`]?.default;
+
     return {
       title: mod.frontmatter.title,
-      coverImagePath: mod.frontmatter.coverImagePath,
+      coverImagePath: coverImage,
       tags: mod.frontmatter.tags,
       author: mod.frontmatter.author,
-      date: mod.frontmatter.date,
+      date: (parsedDate && !isNaN(parsedDate.getTime())) 
+        ? parsedDate.toISOString().split('T')[0]  // Convert back to 'YYYY-MM-DD' string
+        : 'Unknown',  // Fallback in case of an invalid date
       excerpt: mod.frontmatter.excerpt,
       url: '/writeups/' + slug
     }
   }
-)
+).filter(post => post.date !== 'Unknown') // Remove posts with invalid dates
+.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()) // Sort by newest first
 
 const tags = getAllTags()
 ---
