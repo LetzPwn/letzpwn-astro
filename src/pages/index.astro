@@ -72,16 +72,18 @@ const writeups: PostMiniProps[] = Object.entries(writeupModules)
           Come say hi!
         </div>
       </div>
-      <div style="display: flex; flex-direction: column;align-items: center;">
-        <div style="display: inline-block">
-          <a href="/about" class="theme-btn btn-style-one"
-            ><span class="btn-title">About us</span></a
-          >
-          <a href="https://discord.gg/Qjt5zUc" class="theme-btn btn-style-one"
-            ><span class="btn-title">Join Discord</span></a
-          >
-        </div>
-      </div>
+<div style="display: flex; flex-direction: column; align-items: center;">
+  <div class="button-row">
+    <a href="/about" class="theme-btn btn-style-one">
+      <span class="btn-title">About us</span>
+    </a>
+    <a href="https://discord.letzpwn.lu" class="theme-btn btn-style-one">
+      <span class="btn-title">Join Discord</span>
+    </a>
+  </div>
+</div>
+
+
     </div>
     <!-- Latest News Section -->
     <section class="players-section players-page-section">
@@ -155,5 +157,29 @@ const writeups: PostMiniProps[] = Object.entries(writeupModules)
 
   .lower-box {
     text-align: justify;
+  }
+</style>
+<style is:global>
+  .button-row {
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+  }
+
+  .button-row > a {
+    width: 14rem;
+    display: flex;
+    justify-content: center;
+  }
+
+  @media (max-width: 600px) {
+    .button-row {
+      flex-direction: column;
+      width: 100%;
+    }
+
+    .button-row > a {
+      width: 100%;
+    }
   }
 </style>

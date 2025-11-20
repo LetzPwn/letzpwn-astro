@@ -202,16 +202,15 @@ figure{
     color: #3786ff;
 }
 
-.btn-style-one .btn-title{
+.btn-style-one .btn-title {
     position: relative;
-    display:block;
-    z-index:1;
+    display: inline-block;  /* changed */
+    width: 100%;            /* added */
+    text-align: center;     /* added */
+    white-space: nowrap;    /* added */
+    z-index: 1;
     background-color: #3786ff;
-    transition:all 0.3s ease;
-    -moz-transition:all 0.3s ease;
-    -webkit-transition:all 0.3s ease;
-    -ms-transition:all 0.3s ease;
-    -o-transition:all 0.3s ease;
+    transition: all 0.3s ease;
     padding: 5px 30px !important;
     font-size: 11px !important;
 }
@@ -3382,7 +3381,7 @@ img{
 .main-footer {
     position: relative;
     background-color: #000000;
-    padding: 40px 0;
+    padding-top: 40px;
     color: #fff;
 }
 
