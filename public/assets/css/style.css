@@ -3386,14 +3386,18 @@ img{
     color: #fff;
 }
 
-.main-footer:before{
+.main-footer:before {
     position: absolute;
     content: '';
-    left: 0px;
-    top: 0px;
-    right: 0px;
-    height: 213px;
-    background: url(../images/background/6.png) no-repeat;
+    inset: 0;
+    background:
+        linear-gradient(135deg, #1a1a1a 25%, transparent 25%) -20px 0,
+        linear-gradient(225deg, #1a1a1a 25%, transparent 25%) -20px 0,
+        linear-gradient(315deg, #1a1a1a 25%, transparent 25%),
+        linear-gradient(45deg, #1a1a1a 25%, transparent 25%);
+    background-size: 40px 40px;
+    background-color: #000; /* fallback */
+    opacity: 0.15;
 }
 
 .main-footer .widgets-section {
