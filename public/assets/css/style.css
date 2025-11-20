@@ -87,7 +87,7 @@ font-family: 'Roboto Condensed', sans-serif;
 
 body {
 
-    font-size:14px;
+    font-size:18px;
     color:#787878;
     line-height:1.6em;
     font-weight:400;
@@ -3422,18 +3422,18 @@ img{
 }
 
 .main-footer .footer-title h2 {
-    font-size: 18px;
+    font-size: 20px;
     font-weight: 700;
     color: #ffffff;
     text-transform: uppercase;
 }
 
 .main-footer .links-widget .widget-content {
-    padding-left: 20px;
+    padding-left: 22px;
 }
 
 .main-footer .links-widget .list li {
-    margin-bottom: 10px;
+    margin-bottom: 12px;
 }
 
 .main-footer .links-widget .list li a {
@@ -3449,7 +3449,7 @@ img{
 .main-footer .newsletter-widget .text{
     position:relative;
     color:#848484;
-    font-size:16px;
+    font-size:18px;
     line-height:2em;
     margin-bottom:25px;
 }
@@ -3477,7 +3477,7 @@ img{
     padding: 10px 25px;
     height: 80px;
     display:inline-block;
-    font-size: 16px;
+    font-size: 20px;
     background: none;
     font-weight:400;
     color:#ffffff;
@@ -3508,7 +3508,7 @@ img{
     right: 0px;
     float:right;
     color:#ffffff;
-    font-size:18px;
+    font-size:20px;
     font-weight:400;
     text-align:center;
     padding:0px;
