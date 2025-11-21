@@ -25,18 +25,21 @@ const menuItems = [
 
       <div class="top-right">
         <ul class="social-icons">
-            <li>
-              <a href="https://twitter.com/LetzPwnAsbl"
-                ><span class="fab fa-twitter"></span></a>
-            </li>
-            <li>
-              <a href="https://instagram.com/letzpwnasbl"
-                ><span class="fab fa-instagram"></span></a>
-            </li>
-            <li>
-              <a href="https://discord.letzpwn.lu"
-                ><span class="fab fa-discord"></span></a>
-            </li>
+          <li>
+            <a href="https://twitter.com/LetzPwnAsbl">
+              <span class="fab fa-twitter"></span>
+            </a>
+          </li>
+          <li>
+            <a href="https://instagram.com/letzpwnasbl">
+              <span class="fab fa-instagram"></span>
+            </a>
+          </li>
+          <li>
+            <a href="https://discord.letzpwn.lu">
+              <span class="fab fa-discord"></span>
+            </a>
+          </li>
         </ul>
       </div>
     </div>
@@ -46,23 +49,23 @@ const menuItems = [
   <div class="header-upper">
     <div class="inner-container">
       <div class="auto-container clearfix">
-        <!--Logo-->
+        <!-- Logo -->
         <div class="logo-outer">
           <div class="logo">
-            <a href="/"
-              ><img
+            <a href="/">
+              <img
                 src="/assets/images/logo.png"
                 alt=""
                 title="LetzPwn"
                 style="max-width: 260px;"
-              /></a
-            >
+              />
+            </a>
           </div>
         </div>
 
-        <!--Nav Box-->
+        <!-- Nav Box -->
         <div class="nav-outer clearfix">
-          <!--Mobile Navigation Toggler-->
+          <!-- Mobile Navigation Toggler (moved here) -->
           <div class="mobile-nav-toggler">
             <span class="icon flaticon-menu-1"></span>
           </div>
@@ -107,14 +110,14 @@ const menuItems = [
     <div class="auto-container clearfix">
       <!--Logo-->
       <div class="logo pull-left">
-        <a href="/" title=""
-          ><img
+        <a href="/" title="">
+          <img
             src="/assets/images/logo.png"
             style="max-width:100px;"
             alt=""
             title=""
-          /></a
-        >
+          />
+        </a>
       </div>
       <!--Right Col-->
       <div class="pull-right">
@@ -142,3 +145,126 @@ const menuItems = [
   </div>
   <!-- End Mobile Menu -->
 </header>
+
+<style>
+  @media only screen and (max-width: 1023px) {
+  .main-header .header-upper .logo img {
+    max-height: 80px !important;
+    height: auto !important;
+    width: auto !important;
+    object-fit: contain;
+  }
+  .main-header .header-upper .logo-outer {
+    max-height: 100% !important;
+    height: 100px !important;
+    width: auto !important;
+    object-fit: contain;
+    padding: 10px 0 !important;
+  }
+
+  .main-header .top-right {
+    display: none !important;
+  }
+
+  .main-header .header-upper:before,
+  .main-header .header-upper .inner-container:before,
+  .main-header .header-upper .nav-outer:before {
+    display: none !important;
+    content: none !important;
+  }
+}
+
+/* Show when toggled */
+.mobile-menu.open {
+  opacity: 1 !important;
+  visibility: visible !important;
+  display: block !important;
+  z-index: 9999 !important;
+}
+
+/* Logo in drawer */
+.mobile-menu .nav-logo img {
+  max-width: 150px;
+  height: auto;
+}
+
+/* Mobile nav items */
+.mobile-menu .menu-outer ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.mobile-menu .menu-outer li {
+  margin-bottom: 20px;
+}
+
+.mobile-menu .menu-outer a {
+  color: #fff !important;
+  font-size: 18px;
+  text-decoration: none;
+}
+
+.mobile-menu .menu-box {
+  position: fixed !important;
+  top: 0 !important;
+  right: 0 !important;
+  left: auto !important;
+  width: 100% !important;
+  height: 100% !important;
+  background: #000 !important;
+  padding: 20px !important;
+  overflow-y: auto !important;
+  box-sizing: border-box !important;
+
+  opacity: 1 !important;
+  visibility: visible !important;
+  transform: translateX(100%) !important;
+
+  /* animation */
+  transition: transform 0.3s ease !important;
+}
+
+/* When open: slide into view */
+.mobile-menu.open .menu-box {
+  transform: translateX(0) !important;
+}
+
+.mobile-menu .close-btn{
+  position: absolute !important;
+  top: 20px !important;
+  right: 20px !important;
+  font-size: 24px !important;
+  color: #fff !important;
+  cursor: pointer !important;
+  z-index: 10001 !important;
+}
+</style>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+
+  const toggler = document.querySelector(".mobile-nav-toggler");
+  const mobileMenu = document.querySelector(".mobile-menu");
+  const backdrop = document.querySelector(".menu-backdrop");
+  const closeBtn = document.querySelector(".mobile-menu .close-btn");
+  const menuOuter = document.querySelector(".mobile-menu .menu-outer");
+  const desktopMenu = document.querySelector(".main-menu .navbar-collapse").innerHTML;
+
+  // Clone desktop menu into mobile menu
+  if (menuOuter && desktopMenu) {
+    console.log("Cloning menu for mobile");
+    menuOuter.innerHTML = desktopMenu;
+  }
+
+  // Open mobile menu
+  toggler?.addEventListener("click", () => {
+    console.log("Opening mobile menu");
+    mobileMenu.classList.add("open");
+  });
+
+  // Close mobile menu
+  const closeMenu = () => mobileMenu.classList.remove("open");
+  backdrop?.addEventListener("click", closeMenu);
+  closeBtn?.addEventListener("click", closeMenu);
+});
+</script>

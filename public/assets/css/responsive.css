@@ -276,6 +276,23 @@
 		padding-top:20px;
 		text-align:center;	
 	}
+
+	.main-footer .auto-container .widgets-section img {
+		max-height: 100px !important;
+		height: 100% !important;
+		width: 100% !important;
+		object-fit: contain;
+	}
+
+	.main-footer  {
+		padding: 0;
+		margin: 0;
+	}
+
+	.main-footer .auto-container .widgets-section {
+		padding: 6vh 10vw;
+		margin: 0;
+	}
 	
 	.call-to-action-section .content h2,
 	.about-section .lower-content h3{
