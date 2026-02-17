@@ -9,6 +9,12 @@ export const GET: APIRoute = () => {
       "m.homeserver": {
         "base_url": "https://matrix.letzpwn.lu"
       },
+      "org.matrix.msc4143.rtc_foci": [
+        {
+          "type": "livekit",
+          "livekit_service_url": "https://livekit.example.com"
+        }
+      ],
       "org.matrix.msc3575.proxy": {
         "url": "https://matrix.letzpwn.lu"
       }
