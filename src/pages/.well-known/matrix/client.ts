@@ -12,7 +12,7 @@ export const GET: APIRoute = () => {
       "org.matrix.msc4143.rtc_foci": [
         {
           "type": "livekit",
-          "livekit_service_url": "https://livekit.example.com"
+          "livekit_service_url": "https://livekit.letzpwn.lu"
         }
       ],
       "org.matrix.msc3575.proxy": {
