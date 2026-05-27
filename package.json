@@ -1,5 +1,5 @@
 {
-  "name": "",
+  "name": "letzpwn-astro",
   "type": "module",
   "version": "0.0.1",
   "scripts": {
@@ -17,6 +17,7 @@
   "dependencies": {
     "@astrojs/check": "^0.9.3",
     "@astrojs/mdx": "^4.3.7",
+    "@astrojs/rss": "^4.0.18",
     "@astrojs/sitemap": "^3.6.0",
     "@types/node": "^22.7.4",
     "astro": ">=5.15.9",

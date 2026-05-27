@@ -8,48 +8,64 @@ interface MDXModule {
   Content: any // or a specific type if you know it
 }
 
-// Import all markdown files from the 'news' and 'writeups' directories
+const newsImages = import.meta.glob<{ default: string }>('/src/content/news/**/*.{png,jpg,jpeg}', { eager: true })
 const newsModules = import.meta.glob('../content/news/*.mdx', { eager: true })
 
-// Extract, sort, and slice the 3 latest news posts
 const posts: PostMiniProps[] = Object.entries(newsModules)
   .map(([path, module]) => {
-    const mod = module as MDXModule // Use type assertion here
+    const mod = module as MDXModule
     const slug = path.split('/').pop()?.replace('.mdx', '') || ''
+    const rawDate = mod.frontmatter.date
+    const parsedDate = rawDate ? new Date(`${rawDate}T00:00:00Z`) : null
+    const coverImage =
+      newsImages[`/src/content/news/${mod.frontmatter.coverImagePath}`]?.default ||
+      newsImages[`/src/content/news/img/logo.png`]?.default
 
     return {
       ...mod.frontmatter,
-      Content: mod.Content,
-      slug: slug,
-      url: '/news/' + slug
+      coverImagePath: coverImage,
+      slug,
+      url: '/news/' + slug,
+      date: parsedDate && !isNaN(parsedDate.getTime())
+        ? parsedDate.toISOString().split('T')[0]
+        : ''
     }
   })
-  .filter((post) => post.date) // Ensure posts have a date in their frontmatter
-  .sort((a, b) => new Date(b.date).valueOf() - new Date(a.date).valueOf()) // Sort by date (latest first)
-  .slice(0, 3) // Get the 3 latest writeups
+  .filter((post) => post.date)
+  .sort((a, b) => new Date(b.date).valueOf() - new Date(a.date).valueOf())
+  .slice(0, 3)
 
-const writeupModules = import.meta.glob('../../content/writeups/*.mdx', {
-  eager: true
-})
+const writeupImages = import.meta.glob<{ default: string }>('/src/content/writeups/**/*.{png,jpg,jpeg}', { eager: true })
+const writeupModules = import.meta.glob('../content/writeups/*.mdx', { eager: true })
+
 const writeups: PostMiniProps[] = Object.entries(writeupModules)
   .map(([path, module]) => {
-    const mod = module as MDXModule // Use type assertion here
+    const mod = module as MDXModule
     const slug = path.split('/').pop()?.replace('.mdx', '') || ''
+    const rawDate = mod.frontmatter.date
+    const parsedDate = rawDate ? new Date(`${rawDate}T00:00:00Z`) : null
+    const coverImage =
+      writeupImages[`/src/content/writeups/${mod.frontmatter.coverImagePath}`]?.default ||
+      writeupImages[`/src/content/writeups/img/logo.png`]?.default
 
     return {
       ...mod.frontmatter,
-      Content: mod.Content,
-      slug: slug,
-      url: '/writeups/' + slug
+      coverImagePath: coverImage,
+      slug,
+      url: '/writeups/' + slug,
+      date: parsedDate && !isNaN(parsedDate.getTime())
+        ? parsedDate.toISOString().split('T')[0]
+        : ''
     }
   })
-  .filter((post) => post.date) // Ensure posts have a date in their frontmatter
-  .sort((a, b) => new Date(b.date).valueOf() - new Date(a.date).valueOf()) // Sort by date (latest first)
-  .slice(0, 3) // Get the 3 latest writeups
+  .filter((post) => post.date)
+  .sort((a, b) => new Date(b.date).valueOf() - new Date(a.date).valueOf())
+  .slice(0, 3)
 ---
 
 <Layout
-  title="LUXEMBOURGISH CTF/CYBERSECURITY COMMUNITY"
+  title="LetzPwn asbl"
+  standaloneTitle
   subtitle="Welcome to LetzPwn"
 >
   <main>

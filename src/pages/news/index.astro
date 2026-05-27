@@ -3,35 +3,47 @@ import Layout from '../../layouts/Layout.astro'
 import PostMini from '../../components/PostMini.astro'
 import type { Props as PostMiniProps } from '../../components/PostMini.astro'
 
-const images = import.meta.glob<{ default: string }>('/src/content/news/**/*.{png,jpg,jpeg}', { eager: true });
-const newsPosts = import.meta.glob('../../content/news/*.mdx', { eager: true })
-const posts: PostMiniProps[] = Object.entries(newsPosts).map(
-  ([path, module]) => {
-    const mod = module as { frontmatter: PostMiniProps }
-    const slug = path.split('/').pop()?.replace('.mdx', '') || ''
+const PAGE_SIZE = 9
 
-    // Ensure the date is properly formatted as a string before passing it
+interface MDXModule {
+  frontmatter: PostMiniProps
+}
+
+const images = import.meta.glob<{ default: string }>('/src/content/news/**/*.{png,jpg,jpeg}', { eager: true })
+const newsPosts = import.meta.glob('../../content/news/*.mdx', { eager: true })
+
+const allPosts: PostMiniProps[] = Object.entries(newsPosts)
+  .map(([path, module]) => {
+    const mod = module as MDXModule
+    const slug = path.split('/').pop()?.replace('.mdx', '') || ''
     const rawDate = mod.frontmatter.date
-    const parsedDate = rawDate ? new Date(`${rawDate}T00:00:00Z`) : null;
-    const coverImage = images[`/src/content/news/${mod.frontmatter.coverImagePath}`]?.default || images[`/src/content/news/img/logo.png`]?.default;
+    const parsedDate = rawDate ? new Date(`${rawDate}T00:00:00Z`) : null
+    const coverImage =
+      images[`/src/content/news/${mod.frontmatter.coverImagePath}`]?.default ||
+      images[`/src/content/news/img/logo.png`]?.default
 
     return {
       title: mod.frontmatter.title,
       coverImagePath: coverImage,
       tags: mod.frontmatter.tags,
       author: mod.frontmatter.author,
-      date: (parsedDate && !isNaN(parsedDate.getTime())) 
-        ? parsedDate.toISOString().split('T')[0]  // Convert back to 'YYYY-MM-DD' string
-        : 'Unknown',  // Fallback in case of an invalid date
+      date:
+        parsedDate && !isNaN(parsedDate.getTime())
+          ? parsedDate.toISOString().split('T')[0]
+          : 'Unknown',
       excerpt: mod.frontmatter.excerpt,
       url: '/news/' + slug
     }
-  }
-).filter(post => post.date !== 'Unknown') // Remove posts with invalid dates
-.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()) // Sort by newest first
+  })
+  .filter((post) => post.date !== 'Unknown')
+  .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
+
+const posts = allPosts.slice(0, PAGE_SIZE)
+const hasMore = allPosts.length > PAGE_SIZE
+const totalPages = Math.ceil(allPosts.length / PAGE_SIZE)
 ---
 
-<Layout title="Latest News" subtitle="News">
+<Layout title="News" subtitle="News">
   <main>
     <section class="players-section players-page-section">
       <div class="auto-container">
@@ -50,7 +62,31 @@ const posts: PostMiniProps[] = Object.entries(newsPosts).map(
             ))
           }
         </div>
+        {
+          hasMore && (
+            <nav class="pagination" aria-label="News pages">
+              <span class="page-count">Page 1 of {totalPages}</span>
+              <a href="/news/2" class="theme-btn btn-style-one">
+                <span class="btn-title">Older →</span>
+              </a>
+            </nav>
+          )
+        }
       </div>
     </section>
   </main>
 </Layout>
+
+<style>
+  .pagination {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1.5rem;
+    padding: 2rem 0;
+  }
+  .page-count {
+    color: #fff;
+    font-size: 1rem;
+  }
+</style>

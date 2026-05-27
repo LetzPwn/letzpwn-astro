@@ -1,37 +1,46 @@
 ---
-import { getAllTags } from '../../utils/content'
 import Layout from '../../layouts/Layout.astro'
 import PostMini from '../../components/PostMini.astro'
 import type { Props as PostMiniProps } from '../../components/PostMini.astro'
 
-const images = import.meta.glob<{ default: string }>('/src/content/writeups/**/*.{png,jpg,jpeg}', { eager: true });
-const writedups = import.meta.glob('../../content/writeups/*.mdx', { eager: true})
-const posts: PostMiniProps[] = Object.entries(writedups).map(
-  ([path, module]) => {
-    const mod = module as { frontmatter: PostMiniProps } // Use type assertion
-    const slug = path.split('/').pop()?.replace('.mdx', '') || ''
+const PAGE_SIZE = 9
 
-    // Ensure the date is properly formatted as a string before passing it
+interface MDXModule {
+  frontmatter: PostMiniProps
+}
+
+const images = import.meta.glob<{ default: string }>('/src/content/writeups/**/*.{png,jpg,jpeg}', { eager: true })
+const writeupModules = import.meta.glob('../../content/writeups/*.mdx', { eager: true })
+
+const allPosts: PostMiniProps[] = Object.entries(writeupModules)
+  .map(([path, module]) => {
+    const mod = module as MDXModule
+    const slug = path.split('/').pop()?.replace('.mdx', '') || ''
     const rawDate = mod.frontmatter.date
-    const parsedDate = rawDate ? new Date(`${rawDate}T00:00:00Z`) : null;
-    const coverImage = images[`/src/content/writeups/${mod.frontmatter.coverImagePath}`]?.default || images[`/src/content/writeups/img/logo.png`]?.default;
+    const parsedDate = rawDate ? new Date(`${rawDate}T00:00:00Z`) : null
+    const coverImage =
+      images[`/src/content/writeups/${mod.frontmatter.coverImagePath}`]?.default ||
+      images[`/src/content/writeups/img/logo.png`]?.default
 
     return {
       title: mod.frontmatter.title,
       coverImagePath: coverImage,
       tags: mod.frontmatter.tags,
       author: mod.frontmatter.author,
-      date: (parsedDate && !isNaN(parsedDate.getTime())) 
-        ? parsedDate.toISOString().split('T')[0]  // Convert back to 'YYYY-MM-DD' string
-        : 'Unknown',  // Fallback in case of an invalid date
+      date:
+        parsedDate && !isNaN(parsedDate.getTime())
+          ? parsedDate.toISOString().split('T')[0]
+          : 'Unknown',
       excerpt: mod.frontmatter.excerpt,
       url: '/writeups/' + slug
     }
-  }
-).filter(post => post.date !== 'Unknown') // Remove posts with invalid dates
-.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()) // Sort by newest first
+  })
+  .filter((post) => post.date !== 'Unknown')
+  .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
 
-const tags = getAllTags()
+const posts = allPosts.slice(0, PAGE_SIZE)
+const hasMore = allPosts.length > PAGE_SIZE
+const totalPages = Math.ceil(allPosts.length / PAGE_SIZE)
 ---
 
 <Layout title="Writeups" subtitle="Writeups">
@@ -46,14 +55,38 @@ const tags = getAllTags()
                 url={post.url}
                 excerpt={post.excerpt}
                 coverImagePath={post.coverImagePath}
-                tags={tags}
+                tags={post.tags}
                 author={post.author}
                 date={post.date}
               />
             ))
           }
         </div>
+        {
+          hasMore && (
+            <nav class="pagination" aria-label="Writeups pages">
+              <span class="page-count">Page 1 of {totalPages}</span>
+              <a href="/writeups/2" class="theme-btn btn-style-one">
+                <span class="btn-title">Older →</span>
+              </a>
+            </nav>
+          )
+        }
       </div>
     </section>
   </main>
 </Layout>
+
+<style>
+  .pagination {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1.5rem;
+    padding: 2rem 0;
+  }
+  .page-count {
+    color: #fff;
+    font-size: 1rem;
+  }
+</style>

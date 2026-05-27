@@ -1,49 +1,137 @@
 ---
 import Layout from './Layout.astro'
 
-const { frontmatter } = Astro.props
-const dateOptions: object = {
+interface Props {
+  frontmatter: {
+    title: string
+    date: string
+    author?: string
+    tags?: string[]
+    excerpt?: string
+  }
+  section?: string
+}
+
+const { frontmatter, section = 'News' } = Astro.props
+
+const dateOptions: Intl.DateTimeFormatOptions = {
   year: 'numeric',
   month: 'long',
   day: 'numeric'
 }
 
-const formattedPublishDate = new Date(frontmatter.date).toLocaleDateString(
-  'en-DE',
-  dateOptions
-)
+const formattedPublishDate = frontmatter.date
+  ? new Date(`${frontmatter.date}T00:00:00Z`).toLocaleDateString('en-GB', dateOptions)
+  : ''
 ---
 
 <Layout
   title={frontmatter.title}
-  subtitle="News"
-  extra={`By ${frontmatter.author} - ${formattedPublishDate}`}
+  subtitle={section}
+  extra={frontmatter.author ? `By ${frontmatter.author}${formattedPublishDate ? ` · ${formattedPublishDate}` : ''}` : formattedPublishDate}
   tags={frontmatter.tags}
 >
-  <div class="content-container">
-    <article class="main-content">
-      <br />
-      <main>
+  <div class="post-page">
+    <div class="post-container">
+      <div class="blog-detail">
         <slot />
-      </main>
-    </article>
+      </div>
+    </div>
   </div>
 </Layout>
 
 <style>
-  .content-container {
-    padding: 3vh 10vw;
-    color: white;
-    gap: 20px; /* Spacing between main content and sidebar */
-    text-align: justify;
+  .post-page {
+    background-color: #202020;
+    padding: 3rem 0 5rem;
   }
 
-  p {
-    color: white;
+  .post-container {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 0 2rem;
   }
 
-  .main-content {
-    flex: 2; /* Takes up 2/3 of the container */
-    color: white;
+  /* images inside posts */
+  .blog-detail img {
+    display: block;
+    max-width: 100%;
+    height: auto;
+    margin: 1.5rem auto;
+    border-radius: 6px;
+  }
+
+  /* code blocks */
+  .blog-detail pre {
+    border-radius: 6px;
+    padding: 1.2rem;
+    overflow-x: auto;
+    font-size: 0.85rem;
+    line-height: 1.6;
+    background: #1a1a2e;
+    margin: 1.5rem 0;
+  }
+
+  /* inline code */
+  .blog-detail :not(pre) > code {
+    background: #1a1a2e;
+    border-radius: 3px;
+    padding: 0.15em 0.4em;
+    font-size: 0.88em;
+  }
+
+  /* blockquotes */
+  .blog-detail blockquote {
+    border-left: 4px solid #3786ff;
+    margin: 1.5rem 0;
+    padding: 0.5rem 1.2rem;
+    background: #1a1a2e;
+    border-radius: 0 6px 6px 0;
+    font-style: italic;
+  }
+
+  /* headings spacing */
+  .blog-detail h1,
+  .blog-detail h2,
+  .blog-detail h3,
+  .blog-detail h4 {
+    margin-top: 2.5rem;
+    margin-bottom: 0.75rem;
+    color: #fff;
+  }
+
+  .blog-detail h2 {
+    border-bottom: 1px solid #333;
+    padding-bottom: 0.4rem;
+  }
+
+  .blog-detail p {
+    line-height: 1.8;
+    margin-bottom: 1.2rem;
+    color: #ddd;
+  }
+
+  .blog-detail a {
+    color: #59b8e6;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+
+  .blog-detail ul,
+  .blog-detail ol {
+    padding-left: 1.6rem;
+    margin-bottom: 1.2rem;
+  }
+
+  .blog-detail li {
+    margin-bottom: 0.4rem;
+    color: #ddd;
+    line-height: 1.7;
+  }
+
+  .blog-detail hr {
+    border: none;
+    border-top: 1px solid #333;
+    margin: 2rem 0;
   }
 </style>

@@ -1,0 +1,110 @@
+---
+import Layout from '../../layouts/Layout.astro'
+import PostMini from '../../components/PostMini.astro'
+import type { Props as PostMiniProps } from '../../components/PostMini.astro'
+import type { GetStaticPaths, Page } from 'astro'
+
+interface Props {
+  page: Page<PostMiniProps>
+}
+
+interface MDXModule {
+  frontmatter: PostMiniProps
+}
+
+export const getStaticPaths: GetStaticPaths = async ({ paginate }) => {
+  const PAGE_SIZE = 9
+  const images = import.meta.glob<{ default: string }>(
+    '/src/content/news/**/*.{png,jpg,jpeg}',
+    { eager: true }
+  )
+  const newsPosts = import.meta.glob('../../content/news/*.mdx', { eager: true })
+
+  const posts: PostMiniProps[] = Object.entries(newsPosts)
+    .map(([path, module]) => {
+      const mod = module as MDXModule
+      const slug = path.split('/').pop()?.replace('.mdx', '') || ''
+      const rawDate = mod.frontmatter.date
+      const parsedDate = rawDate ? new Date(`${rawDate}T00:00:00Z`) : null
+      const coverImage =
+        images[`/src/content/news/${mod.frontmatter.coverImagePath}`]?.default ||
+        images[`/src/content/news/img/logo.png`]?.default
+
+      return {
+        title: mod.frontmatter.title,
+        coverImagePath: coverImage,
+        tags: mod.frontmatter.tags,
+        author: mod.frontmatter.author,
+        date:
+          parsedDate && !isNaN(parsedDate.getTime())
+            ? parsedDate.toISOString().split('T')[0]
+            : 'Unknown',
+        excerpt: mod.frontmatter.excerpt,
+        url: '/news/' + slug
+      }
+    })
+    .filter((post) => post.date !== 'Unknown')
+    .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
+
+  return paginate(posts, { pageSize: PAGE_SIZE })
+}
+
+const { page } = Astro.props
+---
+
+<Layout title="News" subtitle="News">
+  <main>
+    <section class="players-section players-page-section">
+      <div class="auto-container">
+        <div class="row clearfix">
+          {
+            page.data.map((post) => (
+              <PostMini
+                title={post.title}
+                url={post.url}
+                excerpt={post.excerpt}
+                coverImagePath={post.coverImagePath}
+                tags={post.tags}
+                author={post.author}
+                date={post.date}
+              />
+            ))
+          }
+        </div>
+        {
+          page.lastPage > 1 && (
+            <nav class="pagination" aria-label="News pages">
+              {page.url.prev && (
+                <a href={page.currentPage === 2 ? '/news' : page.url.prev} class="theme-btn btn-style-one">
+                  <span class="btn-title">← Newer</span>
+                </a>
+              )}
+              <span class="page-count">
+                Page {page.currentPage} of {page.lastPage}
+              </span>
+              {page.url.next && (
+                <a href={page.url.next} class="theme-btn btn-style-one">
+                  <span class="btn-title">Older →</span>
+                </a>
+              )}
+            </nav>
+          )
+        }
+      </div>
+    </section>
+  </main>
+</Layout>
+
+<style>
+  .pagination {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1.5rem;
+    padding: 2rem 0;
+  }
+  .page-count {
+    color: #fff;
+    font-size: 1rem;
+  }
+</style>

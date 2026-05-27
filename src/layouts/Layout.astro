@@ -9,20 +9,23 @@ import TagButton from '../components/TagButton.astro'
 
 interface Props {
   title: string
+  description?: string
   background?: string
   subtitle?: string
   extra?: string
   tags?: string[]
+  standaloneTitle?: boolean
 }
 
 function getDefaultBackground(bg: string) {
   return bg || '/assets/images/background/1.png' // Simple example
 }
 
-const { title, background, subtitle, extra, tags } = Astro.props
+const { title, description, background, subtitle, extra, tags, standaloneTitle } = Astro.props
 
 const effectiveBackground = getDefaultBackground(background)
-const renderBreadcrumbs = subtitle.length == 0
+const renderBreadcrumbs = !subtitle
+const metaDescription = description || 'LetzPwn is the Luxembourgish CTF and cybersecurity community — helping people of all skill levels learn about cybersecurity.'
 
 const baseUrl = Astro.site ?? Astro.url
 const cleanPathname = Astro.url.pathname.replace(/\.html$/, '')
@@ -33,20 +36,27 @@ const defaultCanonicalUrl = new URL(cleanPathname + Astro.url.search, baseUrl)
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="description" content="Astro description" />
+    <meta name="description" content={metaDescription} />
+    <meta property="og:title" content={`${title} | LetzPwn`} />
+    <meta property="og:description" content={metaDescription} />
+    <meta property="og:type" content="website" />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content={`${title} | LetzPwn`} />
+    <meta name="twitter:description" content={metaDescription} />
     <meta name="viewport" content="width=device-width" />
     <link rel="stylesheet" href="/assets/css/bootstrap.css" />
     <link rel="stylesheet" href="/assets/css/style.css" />
     <link rel="stylesheet" href="/assets/css/responsive.css" />
     <link rel="stylesheet" href="/assets/css/import_custom.css" />
     <link rel="sitemap" href="/sitemap-index.xml" />
+    <link rel="alternate" type="application/rss+xml" title="LetzPwn RSS Feed" href="/rss.xml" />
     <link rel="canonical" href={defaultCanonicalUrl} />
 
     <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
     <link rel="icon" href="/favicon.ico" type="image/x-icon" />
 
     <meta name="generator" content={Astro.generator} />
-    <title>LetzPwn - Luxembourgish CTF Team</title>
+    <title>{standaloneTitle ? title : `${title} | LetzPwn`}</title>
   </head>
   <body>
     <Header />
@@ -99,6 +109,12 @@ const defaultCanonicalUrl = new URL(cleanPathname + Astro.url.search, baseUrl)
   </body>
 </html>
 <style is:global>
+  /* Override theme's 11px button text */
+  .btn-style-one .btn-title {
+    font-size: 16px !important;
+    padding: 10px 36px !important;
+  }
+
   :root {
     --accent: 136, 58, 234;
     --accent-light: 224, 204, 250;

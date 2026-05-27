@@ -26,18 +26,18 @@ const menuItems = [
       <div class="top-right">
         <ul class="social-icons">
           <li>
-            <a href="https://twitter.com/LetzPwnAsbl">
-              <span class="fab fa-twitter"></span>
+            <a href="https://twitter.com/LetzPwnAsbl" aria-label="LetzPwn on Twitter">
+              <span class="fab fa-twitter" aria-hidden="true"></span>
             </a>
           </li>
           <li>
-            <a href="https://instagram.com/letzpwnasbl">
-              <span class="fab fa-instagram"></span>
+            <a href="https://instagram.com/letzpwnasbl" aria-label="LetzPwn on Instagram">
+              <span class="fab fa-instagram" aria-hidden="true"></span>
             </a>
           </li>
           <li>
-            <a href="https://discord.letzpwn.lu">
-              <span class="fab fa-discord"></span>
+            <a href="https://discord.letzpwn.lu" aria-label="LetzPwn Discord server">
+              <span class="fab fa-discord" aria-hidden="true"></span>
             </a>
           </li>
         </ul>
@@ -55,7 +55,7 @@ const menuItems = [
             <a href="/">
               <img
                 src="/assets/images/logo.png"
-                alt=""
+                alt="LetzPwn"
                 title="LetzPwn"
                 style="max-width: 260px;"
               />
@@ -110,12 +110,11 @@ const menuItems = [
     <div class="auto-container clearfix">
       <!--Logo-->
       <div class="logo pull-left">
-        <a href="/" title="">
+        <a href="/">
           <img
             src="/assets/images/logo.png"
             style="max-width:100px;"
-            alt=""
-            title=""
+            alt="LetzPwn"
           />
         </a>
       </div>
@@ -252,13 +251,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Clone desktop menu into mobile menu
   if (menuOuter && desktopMenu) {
-    console.log("Cloning menu for mobile");
     menuOuter.innerHTML = desktopMenu;
   }
 
   // Open mobile menu
   toggler?.addEventListener("click", () => {
-    console.log("Opening mobile menu");
     mobileMenu.classList.add("open");
   });
 

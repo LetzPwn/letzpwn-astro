@@ -39,7 +39,7 @@ const formattedPublishDate =
 >
   <div class="inner-box hvr-bob fixed-height-box">
     <div class="sponsor-background">
-      <a href={url}><img style="height:300px; overflow:hidden;object-fit:cover;width:auto;" src={coverImagePath.src} alt="" /></a>
+      {coverImagePath?.src && <a href={url}><img style="height:300px; overflow:hidden;object-fit:cover;width:auto;" src={coverImagePath.src} alt={title} /></a>}
     </div>
     <div class="lower-content">
       <div class="post-content">
@@ -67,30 +67,29 @@ const formattedPublishDate =
     border: 3px solid #fff;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    height: 650px; /* Set a fixed height */
-    overflow: hidden; /* Prevent content overflow */
+    height: 620px;
     display: flex;
     flex-direction: column;
-    justify-content: space-between; /* Distribute space between child elements */
   }
 
   .sponsor-background {
     text-align: center;
-    margin-bottom: 20px;
+    flex-shrink: 0;
   }
 
   .lower-content {
     padding: 15px;
-    height: 360px;
     background-color: #f8f9fa;
+    flex: 1;
     display: flex;
     flex-direction: column;
-    justify-content: space-between; /* Keeps footer at the bottom */
+    min-height: 0;
   }
 
   .post-content {
-    flex-grow: 1; /* Allows title & excerpt to expand */
+    flex: 1;
     overflow: hidden;
+    min-height: 0;
   }
 
   .post-footer {
@@ -99,6 +98,8 @@ const formattedPublishDate =
     align-items: center;
     gap: 8px;
     text-align: center;
+    flex-shrink: 0;
+    padding-top: 8px;
   }
 
   .author-date {

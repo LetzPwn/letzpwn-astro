@@ -15,7 +15,7 @@ const { name, pseudo, role, image } = Astro.props
 >
   <div class="inner-box hvr-bob">
     <div class="sponsor-background">
-      <img src={image} alt="" />
+      <img src={image ?? '/assets/images/resource/player-1.jpg'} alt={name} />
     </div>
     <div class="lower-content">
       <h3>{name}</h3>

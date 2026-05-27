@@ -1,0 +1,60 @@
+---
+import Layout from '../layouts/Layout.astro'
+---
+
+<Layout title="Page Not Found" subtitle="404">
+  <main class="not-found-section">
+    <div class="auto-container">
+      <div class="not-found-content">
+        <div class="error-code">404</div>
+        <h2>Page Not Found</h2>
+        <p>The page you're looking for doesn't exist or has been moved.</p>
+        <div class="links">
+          <a href="/" class="theme-btn btn-style-one">
+            <span class="btn-title">Back to Home</span>
+          </a>
+          <a href="/news" class="theme-btn btn-style-one">
+            <span class="btn-title">News</span>
+          </a>
+          <a href="/writeups" class="theme-btn btn-style-one">
+            <span class="btn-title">Writeups</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </main>
+</Layout>
+
+<style>
+  .not-found-section {
+    padding: 6rem 0;
+    background-color: #202020;
+    text-align: center;
+  }
+  .not-found-content {
+    color: #fff;
+  }
+  .error-code {
+    font-size: 8rem;
+    font-weight: 700;
+    color: #059ccf;
+    line-height: 1;
+    margin-bottom: 1rem;
+  }
+  h2 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    color: #fff;
+  }
+  p {
+    font-size: 1.2rem;
+    color: #aaa;
+    margin-bottom: 2.5rem;
+  }
+  .links {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+</style>

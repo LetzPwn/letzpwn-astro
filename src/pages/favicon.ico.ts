@@ -3,16 +3,20 @@ import sharp from 'sharp'
 import ico from 'sharp-ico'
 import path from 'path'
 
-// relative to project root
 const faviconSrc = path.resolve('public/assets/logo.png')
 
-export const GET: APIRoute = async () => {
-  // resize to 32px PNG
-  const buffer = await sharp(faviconSrc).resize(32).toFormat('png').toBuffer()
-  // generate ico
-  const icoBuffer = ico.encode([buffer])
+let cachedIco: Buffer | null = null
 
-  return new Response(icoBuffer, {
-    headers: { 'Content-Type': 'image/x-icon' }
+export const GET: APIRoute = async () => {
+  if (!cachedIco) {
+    const buffer = await sharp(faviconSrc).resize(32).toFormat('png').toBuffer()
+    cachedIco = ico.encode([buffer])
+  }
+
+  return new Response(cachedIco, {
+    headers: {
+      'Content-Type': 'image/x-icon',
+      'Cache-Control': 'public, max-age=86400, immutable'
+    }
   })
 }
