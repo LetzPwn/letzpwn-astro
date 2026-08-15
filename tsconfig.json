@@ -1,4 +1,5 @@
 {
-  "extends": "astro/tsconfigs/base",
-  "exclude": ["playwright-report", "dist", "node_modules", "public"]
+  "extends": "astro/tsconfigs/strict",
+  "include": [".astro/types.d.ts", "**/*"],
+  "exclude": ["dist", "node_modules", "public", "src/content"]
 }

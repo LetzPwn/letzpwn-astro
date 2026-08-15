@@ -1,0 +1,34 @@
+---
+import Layout from '../layouts/Layout.astro'
+---
+
+<Layout
+  title="Page not found"
+  subtitle="404"
+  description="This page does not exist (or has moved)."
+>
+  <section class="section">
+    <div class="auto-container stack-center">
+      <p class="lead">
+        The page you were looking for does not exist, or it has moved.
+      </p>
+      <div class="button-row">
+        <a href="/" class="theme-btn btn-style-one">
+          <span class="btn-title">Back home</span>
+        </a>
+        <a href="/writeups" class="theme-btn btn-style-one">
+          <span class="btn-title">Read writeups</span>
+        </a>
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .lead {
+    max-width: 50ch;
+    margin-bottom: 2rem;
+    font-size: 1.2rem;
+    text-align: center;
+  }
+</style>

@@ -1,3 +1,6 @@
 public/**
+dist/**
 node_modules/
-.*
+.astro/
+src/content/
+package-lock.json

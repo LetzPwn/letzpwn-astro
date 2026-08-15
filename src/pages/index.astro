@@ -1,183 +1,128 @@
 ---
 import Layout from '../layouts/Layout.astro'
-import PostMini from '../components/PostMini.astro'
-import type { Props as PostMiniProps } from '../components/PostMini.astro'
+import PostCard from '../components/PostCard.astro'
+import { getPosts } from '../lib/posts'
 
-interface MDXModule {
-  frontmatter: PostMiniProps
-  Content: any // or a specific type if you know it
-}
+const [news, writeups] = await Promise.all([
+  getPosts('news'),
+  getPosts('writeups')
+])
 
-// Import all markdown files from the 'news' and 'writeups' directories
-const newsModules = import.meta.glob('../content/news/*.mdx', { eager: true })
-
-// Extract, sort, and slice the 3 latest news posts
-const posts: PostMiniProps[] = Object.entries(newsModules)
-  .map(([path, module]) => {
-    const mod = module as MDXModule // Use type assertion here
-    const slug = path.split('/').pop()?.replace('.mdx', '') || ''
-
-    return {
-      ...mod.frontmatter,
-      Content: mod.Content,
-      slug: slug,
-      url: '/news/' + slug
-    }
-  })
-  .filter((post) => post.date) // Ensure posts have a date in their frontmatter
-  .sort((a, b) => new Date(b.date).valueOf() - new Date(a.date).valueOf()) // Sort by date (latest first)
-  .slice(0, 3) // Get the 3 latest writeups
-
-const writeupModules = import.meta.glob('../../content/writeups/*.mdx', {
-  eager: true
-})
-const writeups: PostMiniProps[] = Object.entries(writeupModules)
-  .map(([path, module]) => {
-    const mod = module as MDXModule // Use type assertion here
-    const slug = path.split('/').pop()?.replace('.mdx', '') || ''
-
-    return {
-      ...mod.frontmatter,
-      Content: mod.Content,
-      slug: slug,
-      url: '/writeups/' + slug
-    }
-  })
-  .filter((post) => post.date) // Ensure posts have a date in their frontmatter
-  .sort((a, b) => new Date(b.date).valueOf() - new Date(a.date).valueOf()) // Sort by date (latest first)
-  .slice(0, 3) // Get the 3 latest writeups
+const latestNews = news.slice(0, 3)
+const latestWriteups = writeups.slice(0, 3)
 ---
 
 <Layout
   title="LUXEMBOURGISH CTF/CYBERSECURITY COMMUNITY"
+  pageTitle="LetzPwn - Luxembourgish CTF Team"
   subtitle="Welcome to LetzPwn"
+  description="LetzPwn is the first Luxembourgish CTF team: a community that helps people of any age and skill level get into cybersecurity."
 >
-  <main>
-    <div class="welcome-section">
-      <div class="lower-box">
-        <div class="text">
+  <section class="section">
+    <div class="auto-container">
+      <div class="intro">
+        <p>
           LetzPwn is a community that helps people, no matter their skill or
-          age, to learn more about cybersecurity. We aim to do this, by
-          providing first steps into the cybersecurity world for any interested
-          person. To further enhance all of the team's skills, we are
-          participating in Capture the Flag (CTF) competitions. A CTF is usually
-          about solving cybersecurity related riddles. For each solved riddle a
-          team gets points. The team with the most points wins, easy right? If
-          you want to know more details about how CTFs work, feel free to
-          contact us or do some internet research. A good entry point for your
-          research might be <a href="https://ctftime.org/ctf-wtf/">this site</a
-          >.
-          <br />
-          Our main platform for the community is discord, it's free and easy to join.
-          Come say hi!
-        </div>
+          age, to learn more about cybersecurity. We aim to do this by providing
+          first steps into the cybersecurity world for any interested person. To
+          further enhance all of the team's skills, we are participating in
+          Capture the Flag (CTF) competitions. A CTF is usually about solving
+          cybersecurity related riddles. For each solved riddle a team gets
+          points. The team with the most points wins, easy right? If you want to
+          know more details about how CTFs work, feel free to contact us or do
+          some internet research. A good entry point for your research might be
+          <a href="https://ctftime.org/ctf-wtf/" rel="noopener">this site</a>.
+        </p>
+        <p>
+          Our main platform for the community is Discord, it's free and easy to
+          join. Come say hi!
+        </p>
       </div>
-      <div style="display: flex; flex-direction: column; align-items: center;">
+
+      <div class="stack-center">
         <div class="button-row">
           <a href="/about" class="theme-btn btn-style-one">
             <span class="btn-title">About us</span>
           </a>
-          <a href="https://discord.letzpwn.lu" class="theme-btn btn-style-one">
+          <a
+            href="https://discord.letzpwn.lu"
+            class="theme-btn btn-style-one"
+            rel="noopener"
+          >
             <span class="btn-title">Join Discord</span>
           </a>
         </div>
       </div>
     </div>
-    <!-- Latest News Section -->
-    <section class="players-section players-page-section">
-      <div class="auto-container">
-        <div class="sec-title centered">
-          <h2>Latest News</h2>
-        </div>
-        <div class="row clearfix">
-          {
-            posts.map((post) => (
-              <PostMini
-                title={post.title}
-                url={post.url}
-                coverImagePath={post.coverImagePath}
-                tags={post.tags}
-                author={post.author}
-                date={post.date}
-              />
-            ))
-          }
-        </div>
-      </div>
-      <div style="display: flex; flex-direction: column;align-items: center;">
-        <a href="/news" class="theme-btn btn-style-one"
-          ><span class="btn-title">More news</span></a
-        >
-      </div>
-    </section>
+  </section>
 
-    <!-- Latest Writeups Section -->
-    <section class="players-section players-page-section">
-      <div class="auto-container">
-        <div class="sec-title centered">
-          <h2>Latest Writeups</h2>
-        </div>
-        <div class="row clearfix">
-          {
-            writeups.map((post) => (
-              <PostMini
-                title={post.title}
-                url={post.url}
-                coverImagePath={post.coverImagePath}
-                tags={post.tags}
-                author={post.author}
-                date={post.date}
-              />
-            ))
-          }
-        </div>
+  <section class="section">
+    <div class="auto-container">
+      <div class="sec-title centered">
+        <h2>Latest News</h2>
       </div>
-      <div style="display: flex; flex-direction: column;align-items: center;">
-        <a href="/writeups" class="theme-btn btn-style-one"
-          ><span class="btn-title">More writeups</span></a
-        >
+      {
+        latestNews.length > 0 ? (
+          <ul class="card-grid">
+            {latestNews.map((post, index) => (
+              <PostCard post={post} eager={index === 0} />
+            ))}
+          </ul>
+        ) : (
+          <p class="empty">No news posts yet.</p>
+        )
+      }
+      <div class="stack-center more">
+        <a href="/news" class="theme-btn btn-style-one">
+          <span class="btn-title">More news</span>
+        </a>
       </div>
-    </section>
-  </main>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="auto-container">
+      <div class="sec-title centered">
+        <h2>Latest Writeups</h2>
+      </div>
+      {
+        latestWriteups.length > 0 ? (
+          <ul class="card-grid">
+            {latestWriteups.map((post) => (
+              <PostCard post={post} />
+            ))}
+          </ul>
+        ) : (
+          <p class="empty">No writeups yet.</p>
+        )
+      }
+      <div class="stack-center more">
+        <a href="/writeups" class="theme-btn btn-style-one">
+          <span class="btn-title">More writeups</span>
+        </a>
+      </div>
+    </div>
+  </section>
 </Layout>
 
 <style>
-  main {
-    margin: auto;
-    max-width: calc(100% - 2rem);
-    color: white;
-    font-size: 20px;
-    line-height: 1.6;
-  }
-  section {
-    padding: 115px 0px 115px;
+  .intro {
+    max-width: 70ch;
+    margin: 0 auto 2.5rem;
+    font-size: 1.125rem;
+    line-height: 1.7;
   }
 
-  .lower-box {
-    text-align: justify;
-  }
-</style>
-<style is:global>
-  .button-row {
-    display: flex;
-    flex-direction: row;
-    gap: 1rem;
+  .intro a {
+    color: var(--lp-accent-text);
   }
 
-  .button-row > a {
-    width: 14rem;
-    display: flex;
-    justify-content: center;
+  .more {
+    margin-top: 2.5rem;
   }
 
-  @media (max-width: 600px) {
-    .button-row {
-      flex-direction: column;
-      width: 100%;
-    }
-
-    .button-row > a {
-      width: 100%;
-    }
+  .empty {
+    text-align: center;
+    color: var(--lp-muted);
   }
 </style>

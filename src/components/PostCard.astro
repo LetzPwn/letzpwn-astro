@@ -1,0 +1,54 @@
+---
+import { Image } from 'astro:assets'
+import TagButton from './TagButton.astro'
+import { formatDate, isoDate, type Post } from '../lib/posts'
+
+interface Props {
+  post: Post
+  /** The first cards in a listing are above the fold, so load them eagerly. */
+  eager?: boolean
+}
+
+const { post, eager = false } = Astro.props
+
+// Covers that are square-ish (the logo fallback, portraits, screenshots of
+// logos) are shown whole instead of being cropped to the card's 16:9 window.
+const isWideCover = post.cover.width / post.cover.height >= 1.4
+---
+
+<li class="card">
+  <a
+    class:list={['card__media', { 'card__media--contain': !isWideCover }]}
+    href={post.url}
+    tabindex="-1"
+    aria-hidden="true"
+  >
+    <Image
+      src={post.cover}
+      alt=""
+      width={640}
+      height={360}
+      loading={eager ? 'eager' : 'lazy'}
+      decoding="async"
+    />
+  </a>
+  <div class="card__body">
+    <h3 class="card__title"><a href={post.url}>{post.title}</a></h3>
+    {post.excerpt && <p class="card__excerpt">{post.excerpt}</p>}
+    <p class="card__meta">
+      {post.author && <span>{post.author} · </span>}
+      <time datetime={isoDate(post.date)}>{formatDate(post.date)}</time>
+    </p>
+    {
+      post.tags.length > 0 && (
+        <ul class="tag-list card__footer">
+          {post.tags.map((tag) => (
+            <li>
+              <TagButton tag={tag} />
+            </li>
+          ))}
+        </ul>
+      )
+    }
+  </div>
+</li>

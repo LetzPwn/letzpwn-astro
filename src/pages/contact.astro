@@ -1,103 +1,115 @@
 ---
 import Layout from '../layouts/Layout.astro'
+import { CONTACT_EMAIL } from '../lib/site'
+
+const channels = [
+  {
+    icon: 'fas fa-envelope',
+    label: CONTACT_EMAIL,
+    href: `mailto:${CONTACT_EMAIL}`,
+    external: false
+  },
+  {
+    icon: 'fab fa-discord',
+    label: 'Join our Discord server',
+    href: 'https://discord.letzpwn.lu',
+    external: true
+  },
+  {
+    icon: 'fab fa-instagram',
+    label: '@letzpwnasbl',
+    href: 'https://www.instagram.com/letzpwnasbl/',
+    external: true
+  },
+  {
+    icon: 'fab fa-twitter',
+    label: '@LetzPwnAsbl',
+    href: 'https://twitter.com/LetzPwnAsbl',
+    external: true
+  }
+]
 ---
 
-<Layout title="Contact Us" subtitle="Get in Touch">
-  <main class="contact-section">
+<Layout
+  title="Contact Us"
+  subtitle="Get in Touch"
+  description="Reach LetzPwn by email, Discord, Instagram or Twitter."
+>
+  <section class="section">
     <div class="auto-container">
-      <div class="contact-options">
-        <p>
-          If you have any questions or want to connect, feel free to reach out
-          through any of the following:
-        </p>
+      <p class="intro">
+        If you have any questions or want to connect, feel free to reach out
+        through any of the following:
+      </p>
 
-        <div class="contact-blocks">
-          <div class="contact-block">
-            <h1 class="fas fa-envelope"></h1>
-            <h4><a href="mailto:info@letzpwn.lu">info@letzpwn.lu</a></h4>
-          </div>
-          <div class="contact-block">
-            <h1 class="fab fa-discord"></h1>
-            <h4>
+      <ul class="channels">
+        {
+          channels.map((channel) => (
+            <li class="channel">
+              <span
+                class={`channel__icon ${channel.icon}`}
+                aria-hidden="true"
+              />
               <a
-                href="https://discord.letzpwn.lu"
-                target="_blank"
-                rel="noopener noreferrer">Join our Discord Server</a>
-            </h4>
-          </div>
-        </div>
-        <br />
-        <div class="contact-blocks">
-          <div class="contact-block">
-            <h1 class="fab fa-instagram"></h1>
-            <h4>
-              <a
-                href="https://www.instagram.com/letzpwnasbl/"
-                target="_blank"
-                rel="noopener noreferrer">@letzpwnasbl</a>
-            </h4>
-          </div>
-          <div class="contact-block">
-            <h1 class="fab fa-twitter"></h1>
-            <h4>
-              <a
-                href="https://twitter.com/LetzPwnAsbl"
-                target="_blank"
-                rel="noopener noreferrer">@LetzPwnAsbl</a>
-            </h4>
-          </div>
-        </div>
-      </div>
+                class="channel__link"
+                href={channel.href}
+                rel={channel.external ? 'noopener external' : undefined}
+                target={channel.external ? '_blank' : undefined}
+              >
+                {channel.label}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
     </div>
-  </main>
+  </section>
 </Layout>
 
 <style>
-  .contact-section {
-    padding: 4rem 0;
-    background-color: #202020;
-  }
-  .contact-options {
-    text-align: center;
-    max-width: 1000px;
-    margin: 0 auto;
-    color: #3786ff;
-  }
-  .contact-options h4,
-  p {
+  .intro {
+    max-width: 60ch;
+    margin: 0 auto 2.5rem;
     font-size: 1.2rem;
-    margin-bottom: 2rem;
-    color: #fff;
+    text-align: center;
   }
-  .contact-blocks {
+
+  .channels {
     display: grid;
-    grid-template-columns: 1fr; /* Default to single column */
-    gap: 2rem;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: var(--lp-gap);
+    max-width: 1000px;
+    padding: 0;
+    margin: 0 auto;
+    list-style: none;
   }
-  /* Make blocks side-by-side on very large screens */
-  @media (min-width: 1200px) {
-    .contact-blocks {
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    }
+
+  .channel {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    align-items: center;
+    padding: 1.75rem;
+    text-align: center;
+    background: var(--lp-surface);
+    border: 1px solid var(--lp-border);
+    border-radius: var(--lp-radius);
   }
-  .contact-block {
-    padding: 1.5rem;
-    border-radius: 8px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    background-color: #2a2a2a;
+
+  .channel__icon {
+    color: var(--lp-accent-text);
+    font-size: 2.5rem;
   }
-  .contact-block h3 {
-    font-size: 1.8rem;
-    margin-bottom: 0.5rem;
-  }
-  .contact-block p {
-    font-size: 1.1rem;
-  }
-  .contact-block a {
-    color: var(--accent-dark);
+
+  .channel__link {
+    color: var(--lp-accent-text);
+    font-size: 1.15rem;
     text-decoration: none;
+    word-break: break-word;
   }
-  .contact-block a:hover {
+
+  .channel__link:hover,
+  .channel__link:focus {
     text-decoration: underline;
   }
 </style>

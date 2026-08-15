@@ -1,97 +1,174 @@
 ---
 import Layout from '../layouts/Layout.astro'
+import { CONTACT_EMAIL } from '../lib/site'
+
+// Keep this in sync with the site: it is only accurate as long as letzpwn.lu
+// stays a static site with no analytics, no cookies and no third-party assets.
+const lastUpdated = '15 August 2026'
 ---
 
-<Layout title="Privacy Policy" subtitle="Privacy Policy">
-  <main class="">
-    <h1>Privacy Policy of LetzPwn asbl</h1>
-    LetzPwn operates the letzpwn.lu website, which provides the SERVICE. This page
-    is used to inform website visitors regarding our policies with the collection,
-    use, and disclosure of Personal Information if anyone decided to use our Service,
-    the letzpwn.lu website.
-    <hr />
+<Layout
+  title="Privacy Policy"
+  subtitle="Legal"
+  description="What data letzpwn.lu processes: no cookies, no analytics, no third-party requests — only the server logs of our host."
+>
+  <section class="section">
+    <div class="auto-container">
+      <div class="prose">
+        <p class="summary">
+          <strong>In short:</strong> letzpwn.lu is a static website. It sets no cookies,
+          runs no analytics or tracking, and loads nothing from third-party servers.
+          The only data processed when you visit is the request log kept by our hosting
+          provider.
+        </p>
 
-    <h2>Information Collection and Use</h2>
-    We do NOT collect any data about our visitors.
-    <hr />
+        <h2>Who is responsible</h2>
+        <p>
+          LetzPwn asbl, a non-profit association registered in Luxembourg,
+          operates letzpwn.lu and is the controller for the data described on
+          this page. You can reach us at
+          <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a>.
+        </p>
 
-    <h2>Log Data</h2>
-    We want to inform you that whenever you visit our Service, we collect information
-    that your browser sends to us that is called Log Data. This Log Data may include
-    information such as your computer’s Internet Protocol ("IP") address, browser
-    version, pages of our Service that you visit, the time and date of your visit,
-    the time spent on those pages, and other statistics.
-    <hr />
+        <h2>What we collect ourselves</h2>
+        <p>
+          Nothing. The website consists of pre-built HTML, CSS, images and
+          fonts. There are no accounts, no forms, no comment system, no
+          advertising, and no analytics or tracking scripts of any kind. We do
+          not build profiles of visitors and we have no way of recognising you
+          across visits.
+        </p>
 
-    <h2>Cookies</h2>
-    Cookies are files with small amount of data that is commonly used an anonymous
-    unique identifier. These are sent to your browser from the website that you visit
-    and are stored on your computer’s hard drive. Our website does not use cookies
-    at the moment.
-    <hr />
+        <h2>Cookies and local storage</h2>
+        <p>
+          The website sets no cookies and stores nothing in your browser's local
+          storage. Because there is nothing to consent to, you will not see a
+          cookie banner.
+        </p>
 
-    <h2>Service Providers</h2>
-    We may employ third-party companies and individuals due to the following reasons:
-    <br />
-    To facilitate our Service;
-    <br />
-    To provide the Service on our behalf;
-    <br />
-    To perform Service-related services; or
-    <br />
-    To assist us in analyzing how our Service is used.
-    <br />
-    We want to inform our Service users that these third parties have access to your
-    Personal Information. The reason is to perform the tasks assigned to them on
-    our behalf. However, they are obligated not to disclose or use the information
-    for any other purpose.
-    <hr />
+        <h2>Third-party content</h2>
+        <p>
+          Every file the website needs — including the webfonts — is served from
+          letzpwn.lu. No embedded fonts, scripts, videos, maps or social media
+          widgets contact another company while you read a page, so no third
+          party learns of your visit unless you click a link yourself.
+        </p>
 
-    <h2>Security</h2>
-    We value your trust in providing us your Personal Information, thus we are striving
-    to use commercially acceptable means to protect it. But remember that no method
-    of transmission over the internet, or method of electronic storage is 100% secure
-    and reliable, and we cannot guarantee its absolute security.
-    <hr />
+        <h2>Hosting and server logs</h2>
+        <p>
+          The website is hosted on GitHub Pages, a service of GitHub, Inc. Like
+          any web server, it records technical data about each request in order
+          to deliver the page and to keep the service secure and available. That
+          typically includes your IP address, the time of the request, the page
+          requested, and information your browser sends such as its user agent
+          and referring page.
+        </p>
+        <p>
+          These logs are created and controlled by GitHub, not by us — we have
+          no access to them and do not receive any statistics from them. GitHub
+          is based in the United States; transfers are covered by its own
+          safeguards and its
+          <a
+            href="https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement"
+            rel="noopener external"
+            target="_blank">GitHub Privacy Statement</a
+          >, including the section on
+          <a
+            href="https://docs.github.com/en/pages/getting-started-with-github-pages/what-is-github-pages#data-collection"
+            rel="noopener external"
+            target="_blank">data collection by GitHub Pages</a
+          >.
+        </p>
 
-    <h2>Links to Other Sites</h2>
-    Our Service may contain links to other sites. If you click on a third-party link,
-    you will be directed to that site. Note that these external sites are not operated
-    by us. Therefore, we strongly advise you to review the Privacy Policy of these
-    websites. We have no control over, and assume no responsibility for the content,
-    privacy policies, or practices of any third-party sites or services.
-    <hr />
+        <h2>If you contact us</h2>
+        <p>
+          If you write to us by email, we process your address, your message and
+          anything you choose to include, for the sole purpose of answering you.
+          We keep such correspondence only as long as it is useful for that
+          purpose, and we do not use it for anything else or pass it on.
+        </p>
 
-    <h2>Children’s Privacy</h2>
-    Our Services do not address anyone under the age of 13. We do not knowingly collect
-    personal identifiable information from children under 13. In the case we discover
-    that a child under 13 has provided us with personal information, we immediately
-    delete this from our servers. If you are a parent or guardian and you are aware
-    that your child has provided us with personal information, please <a
-      href="/contact">contact us</a
-    > so that we will be able to do necessary actions.
-    <hr />
+        <h2>Our community platforms</h2>
+        <p>
+          Our community lives on Discord, and we publish accounts on Twitter/X
+          and Instagram. Those are separate services with their own terms and
+          privacy policies: when you join or follow us there, the operator of
+          that platform processes your data under its own rules, not ours.
+          Within our own Discord server we only see what the platform shows any
+          server moderator.
+        </p>
+        <p>
+          We also run a Matrix homeserver at matrix.letzpwn.lu. Using it means
+          creating an account on that server, and messages, accounts and
+          connection data are processed there rather than by this website. This
+          policy covers letzpwn.lu only.
+        </p>
 
-    <h2>Changes to This Privacy Policy</h2>
-    We may update our Privacy Policy from time to time. Thus, we advise you to review
-    this page periodically for any changes. We will notify you of any changes by
-    posting the new Privacy Policy on this page. These changes are effective immediately
-    after they are posted on this page.
-    <hr />
+        <h2>Your rights</h2>
+        <p>
+          Under the GDPR you have the right to access, rectify and erase your
+          personal data, to restrict or object to its processing, and to data
+          portability. Since we hold no visitor data, these rights are in
+          practice only relevant to correspondence you have sent us — write to
+          <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a> and we will handle
+          it. For anything recorded in the hosting logs, please refer to GitHub's
+          privacy statement linked above.
+        </p>
+        <p>
+          You also have the right to lodge a complaint with the Luxembourg
+          supervisory authority, the
+          <a
+            href="https://cnpd.public.lu/"
+            rel="noopener external"
+            target="_blank"
+            >Commission nationale pour la protection des données (CNPD)</a
+          >.
+        </p>
 
-    <h2>Contact Us</h2>
-    If you have any questions or suggestions about our Privacy Policy, do not hesitate
-    to <a href="/contact">contact us</a>.
-  </main>
+        <h2>Children</h2>
+        <p>
+          The website is open to everyone and collects no data, so it is safe
+          for minors to read. Our community platforms have their own minimum age
+          requirements, which we expect members to respect.
+        </p>
+
+        <h2>Links to other sites</h2>
+        <p>
+          Our pages, news posts and writeups link to external websites — CTF
+          platforms, challenge write-ups, tools and social media. We have no
+          control over those sites and take no responsibility for their content
+          or their privacy practices. Their policies apply once you follow a
+          link.
+        </p>
+
+        <h2>Changes to this policy</h2>
+        <p>
+          We update this page whenever the way the website works changes. The
+          current version is from <strong>{lastUpdated}</strong>; the full
+          history is public in the
+          <a
+            href="https://github.com/LetzPwn/letzpwn-astro"
+            rel="noopener external"
+            target="_blank">repository of this website</a
+          >.
+        </p>
+
+        <h2>Contact</h2>
+        <p>
+          Questions or suggestions about this policy: <a
+            href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a
+          > or via our <a href="/contact">contact page</a>.
+        </p>
+      </div>
+    </div>
+  </section>
 </Layout>
+
 <style>
-  main {
-    margin: auto;
-    padding: 1rem;
-    width: 1000px;
-    max-width: calc(100% - 2rem);
-    color: white;
-    font-size: 20px;
-    line-height: 1.6;
+  .summary {
+    padding: 1.25rem 1.5rem;
+    background: var(--lp-surface);
+    border-left: 3px solid var(--lp-accent);
+    border-radius: var(--lp-radius);
   }
 </style>

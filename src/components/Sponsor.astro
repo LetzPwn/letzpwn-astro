@@ -1,55 +1,84 @@
 ---
 interface Props {
   name: string
+  /** Path of the logo inside public/, or an absolute URL. */
   logoPath: string
   url: string
+  /** Twitter handle without the leading "@". */
   twitter?: string
 }
 
 const { name, logoPath, url, twitter } = Astro.props
-const twitterUrl = 'https://twitter.com/' + twitter
 ---
 
-<div
-  class="player-block col-lg-4 col-md-6 col-sm-12 wow fadeInLeft"
-  data-wow-delay="0ms"
->
-  <div class="inner-box hvr-bob">
-    <div class="sponsor-background">
-      <a href={url}><img src={logoPath} alt="" /></a>
-    </div>
-    <div class="lower-content">
-      <h3><a href={url}>{name}</a></h3>
-      <div class="level">
-        <slot />
-      </div>
-      <ul class="social-icons">
-        {
-          twitter && (
-            <li>
-              <a href={twitterUrl}>
-                <span class="fab fa-twitter" />
-              </a>
-            </li>
-          )
-        }
-        {
-          url && (
-            <li>
-              <a href={url}>
-                <span class="fas fa-globe" />
-              </a>
-            </li>
-          )
-        }
-      </ul>
-    </div>
+<li class="card sponsor">
+  <div class="card__media sponsor__media">
+    <img src={logoPath} alt={`${name} logo`} loading="lazy" decoding="async" />
   </div>
-</div>
+  <div class="card__body">
+    <h3 class="card__title">
+      <a href={url} rel="noopener external" target="_blank">{name}</a>
+    </h3>
+    <p class="card__excerpt"><slot /></p>
+    <ul class="sponsor__links card__footer">
+      <li>
+        <a href={url} rel="noopener external" target="_blank">
+          <span class="fas fa-globe" aria-hidden="true"></span>
+          <span class="sr-only">{name} website</span>
+        </a>
+      </li>
+      {
+        twitter && (
+          <li>
+            <a
+              href={`https://twitter.com/${twitter}`}
+              rel="noopener external"
+              target="_blank"
+            >
+              <span class="fab fa-twitter" aria-hidden="true" />
+              <span class="sr-only">{name} on Twitter</span>
+            </a>
+          </li>
+        )
+      }
+    </ul>
+  </div>
+</li>
 
 <style>
-  .sponsor-background {
-    background-color: white;
-    display: inline-block; /* Adjust display type as needed */
+  .sponsor__media {
+    display: grid;
+    place-items: center;
+    padding: 20px;
+    background: #fff;
+    aspect-ratio: 16 / 9;
+  }
+
+  .sponsor__media img {
+    max-width: 80%;
+    max-height: 120px;
+    object-fit: contain;
+  }
+
+  .sponsor__links {
+    display: flex;
+    gap: 14px;
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    font-size: 1.25rem;
+  }
+
+  .sponsor__links a {
+    color: var(--lp-accent-text);
+  }
+
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
   }
 </style>

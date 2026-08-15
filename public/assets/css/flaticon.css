@@ -1,21 +1,13 @@
 @font-face {
   font-family: "Flaticon";
-  src: url("../fonts/flaticon.eot");
-  src: url("../fonts/flaticon.eot?#iefix") format("embedded-opentype"),
-       url("../fonts/flaticon.woff2") format("woff2"),
+  src: url("../fonts/flaticon.woff2") format("woff2"),
        url("../fonts/flaticon.woff") format("woff"),
-       url("../fonts/flaticon.ttf") format("truetype"),
-       url("../fonts/flaticon.svg#Flaticon") format("svg");
+       url("../fonts/flaticon.ttf") format("truetype");
   font-weight: normal;
   font-style: normal;
 }
 
-@media screen and (-webkit-min-device-pixel-ratio:0) {
-  @font-face {
-    font-family: "Flaticon";
-    src: url("../fonts/flaticon.svg#Flaticon") format("svg");
-  }
-}
+/* The legacy WebKit SVG-font override was dropped with flaticon.svg. */
 
 [class^="flaticon-"]:before, [class*=" flaticon-"]:before,
 [class^="flaticon-"]:after, [class*=" flaticon-"]:after {   

@@ -1,33 +1,47 @@
 ---
+import { Image } from 'astro:assets'
+import defaultAvatar from '../assets/logo.png'
+
 interface Props {
   name: string
   pseudo: string
-  image?: string
   role?: string
+  image?: ImageMetadata
 }
 
-const { name, pseudo, role, image } = Astro.props
+const { name, pseudo, role, image = defaultAvatar } = Astro.props
 ---
 
-<div
-  class="player-block col-lg-4 col-md-6 col-sm-12 wow fadeInLeft"
-  data-wow-delay="0ms"
->
-  <div class="inner-box hvr-bob">
-    <div class="sponsor-background">
-      <img src={image} alt="" />
-    </div>
-    <div class="lower-content">
-      <h3>{name}</h3>
-
-      <h6>{pseudo}</h6>
-      <div class="level">
-        <slot />
-      </div>
-
-      <div class="social-icons centered">
-        <h5>{role}</h5>
-      </div>
-    </div>
+<li class="card member">
+  <div class="card__media card__media--contain">
+    <Image src={image} alt="" width={320} height={320} loading="lazy" />
   </div>
-</div>
+  <div class="card__body">
+    <h3 class="card__title">{name}</h3>
+    <p class="member__pseudo">{pseudo}</p>
+    {role && <p class="member__role">{role}</p>}
+    <p class="member__blurb"><slot /></p>
+  </div>
+</li>
+
+<style>
+  .member__pseudo {
+    margin: 0;
+    color: var(--lp-accent-text);
+    font-family: 'Special Elite', monospace;
+  }
+
+  .member__role {
+    margin: 0;
+    color: var(--lp-muted);
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+  }
+
+  .member__blurb {
+    margin: 0;
+    color: var(--lp-muted);
+    font-size: 0.9rem;
+  }
+</style>

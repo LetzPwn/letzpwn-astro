@@ -1,50 +1,43 @@
 ---
 import Layout from '../../layouts/Layout.astro'
-import { slugify } from '../../utils/slugify'
+import { getTagsWithPosts } from '../../lib/posts'
 
-const newsPosts = import.meta.glob('../../content/news/*.mdx', { eager: true })
-const writeupPosts = import.meta.glob('../../content/writeups/*.mdx', {
-  eager: true
-})
-
-// Extract posts from news and writeups
-const allPosts = [...Object.values(newsPosts), ...Object.values(writeupPosts)]
-
-// Collect tags from all posts
-const tagMap = new Map<string, number>()
-
-allPosts.forEach((mod) => {
-  const frontmatter = (mod as { frontmatter: { tags?: string[] } }).frontmatter
-  if (frontmatter.tags) {
-    frontmatter.tags.forEach((tag) => {
-      tagMap.set(tag, (tagMap.get(tag) || 0) + 1)
-    })
-  }
-})
-
-const tags = Array.from(tagMap.entries()).map(([tag, count]) => ({
-  tag,
-  count
-}))
+const tags = await getTagsWithPosts()
 ---
 
-<Layout title="Tags" subtitle="Browse by Tags">
-  <main>
-    <section>
-      <div class="auto-container">
-        <h2>All Tags</h2>
-        <ul>
-          {
-            tags.map(({ tag, count }) => (
+<Layout
+  title="Tags"
+  subtitle="Browse by Tag"
+  description="Browse LetzPwn news and CTF writeups by topic."
+>
+  <section class="section">
+    <div class="auto-container">
+      {
+        tags.length > 0 ? (
+          <ul class="tag-list tag-index">
+            {tags.map((tag) => (
               <li>
-                <a href={`/tags/${slugify(tag)}`}>
-                  {tag} ({count})
+                <a class="tag" href={tag.url}>
+                  {tag.name} <span class="count">({tag.posts.length})</span>
                 </a>
               </li>
-            ))
-          }
-        </ul>
-      </div>
-    </section>
-  </main>
+            ))}
+          </ul>
+        ) : (
+          <p>No tags yet.</p>
+        )
+      }
+    </div>
+  </section>
 </Layout>
+
+<style>
+  .tag-index {
+    gap: 12px;
+    font-size: 1rem;
+  }
+
+  .count {
+    color: var(--lp-muted);
+  }
+</style>

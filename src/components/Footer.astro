@@ -1,48 +1,77 @@
 ---
+import { Image } from 'astro:assets'
+import logo from '../assets/logo.png'
+import {
+  CONTACT_EMAIL,
+  FOOTER_LINKS,
+  SITE_NAME,
+  SOCIAL_LINKS
+} from '../lib/site'
+
 const year = new Date().getFullYear()
 ---
 
 <footer class="main-footer">
   <div class="auto-container">
-    <!-- Widgets Section -->
     <div class="widgets-section">
       <div class="row clearfix">
         <!-- Logo Column -->
         <div class="column col-lg-4 col-md-6 col-sm-12">
           <div class="footer-widget logo-widget">
             <div class="logo">
-              <a href="/index"
-                ><img src="/assets/images/logo.png" alt="LetzPwn Logo" /></a
-              >
+              <a href="/" aria-label={`${SITE_NAME} home`}>
+                <Image
+                  src={logo}
+                  alt={`${SITE_NAME} logo`}
+                  width={200}
+                  height={200}
+                  loading="lazy"
+                />
+              </a>
             </div>
           </div>
         </div>
+
         <!-- Links Column -->
         <div class="column col-lg-4 col-md-6 col-sm-12">
-          <div class="footer-widget links-widget">
+          <nav class="footer-widget links-widget" aria-label="Footer">
             <div class="widget-content">
               <div class="footer-title">
                 <h2>Links</h2>
               </div>
-              <div class="row clearfix">
-                <div class="column col-lg-6 col-md-6 col-sm-12">
-                  <ul class="list">
-                    <li><a href="/about">About</a></li>
-                    <li><a href="/team">Our Team</a></li>
-                    <li><a href="/news">News</a></li>
-                  </ul>
-                </div>
-                <div class="column col-lg-6 col-md-6 col-sm-12">
-                  <ul class="list">
-                    <li><a href="/contact">Contact</a></li>
-                    <li><a href="/privacy_policy">Privacy Policy</a></li>
-                  </ul>
-                </div>
+              <ul class="list footer-links">
+                {
+                  FOOTER_LINKS.map((link) => (
+                    <li>
+                      <a href={link.path}>{link.name}</a>
+                    </li>
+                  ))
+                }
+              </ul>
+            </div>
+          </nav>
+        </div>
+
+        <!-- Contact Column -->
+        <div class="column col-lg-4 col-md-6 col-sm-12">
+          <div class="footer-widget links-widget">
+            <div class="widget-content">
+              <div class="footer-title">
+                <h2>Contact</h2>
               </div>
+              <ul class="list">
+                <li>
+                  <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a>
+                </li>
+                <li>
+                  <a href="https://discord.letzpwn.lu" rel="noopener">
+                    Discord server
+                  </a>
+                </li>
+              </ul>
             </div>
           </div>
         </div>
-        <!-- Other columns can go here -->
       </div>
     </div>
   </div>
@@ -50,31 +79,37 @@ const year = new Date().getFullYear()
   <!-- Footer Bottom -->
   <div class="footer-bottom">
     <div class="auto-container">
-      <!--Scroll to top-->
-      <div class="scroll-to-top scroll-to-target" data-target="html">
-        <span class="flaticon-up-arrow"></span>
-      </div>
-      <!--Scroll to top-->
+      <button
+        type="button"
+        class="scroll-to-top"
+        aria-label="Back to top"
+        hidden
+      >
+        <span class="flaticon-up-arrow" aria-hidden="true"></span>
+      </button>
+
       <div class="row clearfix">
-        <!-- Copyright Column -->
         <div class="column col-lg-6 col-md-12 col-sm-12">
-          <div class="copyright">&copy; 2022-{year} All Rights Reserved</div>
+          <div class="copyright">
+            &copy; 2022-{year}
+            {SITE_NAME} asbl. All rights reserved.
+          </div>
         </div>
-        <!-- Social Icons Column -->
         <div class="column col-lg-6 col-md-12 col-sm-12">
           <ul class="social-icons">
-            <li>
-              <a href="https://twitter.com/LetzPwnAsbl"
-                ><span class="fab fa-twitter"></span></a>
-            </li>
-            <li>
-              <a href="https://instagram.com/letzpwnasbl"
-                ><span class="fab fa-instagram"></span></a>
-            </li>
-            <li>
-              <a href="https://discord.letzpwn.lu"
-                ><span class="fab fa-discord"></span></a>
-            </li>
+            {
+              SOCIAL_LINKS.map((social) => (
+                <li>
+                  <a
+                    href={social.url}
+                    rel="noopener me"
+                    aria-label={`${SITE_NAME} on ${social.name}`}
+                  >
+                    <span class={social.icon} aria-hidden="true" />
+                  </a>
+                </li>
+              ))
+            }
           </ul>
         </div>
       </div>
@@ -82,17 +117,56 @@ const year = new Date().getFullYear()
   </div>
 </footer>
 
+<style>
+  /* The template centres the footer widgets vertically, which leaves the
+     column headings at different heights. */
+  .main-footer :global(.widgets-section .row) {
+    align-items: flex-start;
+  }
+
+  /* Two balanced link columns without a nested grid; the template's own
+     columns did not line up. */
+  .footer-links {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0 20px;
+  }
+
+  /* The template renders footer links in #848484, which is too dim on the
+     near-black footer. */
+  .links-widget :global(.list li a) {
+    color: var(--lp-muted);
+  }
+
+  .links-widget :global(.list li a:hover),
+  .links-widget :global(.list li a:focus) {
+    color: var(--lp-accent-text);
+  }
+
+  .scroll-to-top {
+    background: none;
+    border: 0;
+    cursor: pointer;
+  }
+
+  .scroll-to-top[hidden] {
+    display: none;
+  }
+</style>
+
 <script>
-  //Get the button
-  let scrollTop = document.getElementsByClassName('scroll-to-top')[0]
+  const scrollTop = document.querySelector<HTMLButtonElement>('.scroll-to-top')
 
-  // When the user scrolls down 20px from the top of the document, show the button
+  if (scrollTop) {
+    const toggleVisibility = () => {
+      scrollTop.hidden = window.scrollY < 200
+    }
 
-  // When the user clicks on the button, scroll to the top of the document
-  scrollTop.addEventListener('click', backToTop)
+    scrollTop.addEventListener('click', () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' })
+    })
 
-  function backToTop() {
-    document.body.scrollTop = 0
-    document.documentElement.scrollTop = 0
+    window.addEventListener('scroll', toggleVisibility, { passive: true })
+    toggleVisibility()
   }
 </script>

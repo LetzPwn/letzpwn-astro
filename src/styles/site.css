@@ -1,0 +1,384 @@
+/*
+ * Site-wide overrides on top of the vendored template stylesheets
+ * (public/assets/css/*). Anything reused by more than one component belongs
+ * here rather than in a scoped <style> block or an inline style attribute.
+ */
+
+:root {
+  /* Brand blue, matching the buttons and headings of the vendored template. */
+  --lp-accent: #3786ff;
+  --lp-accent-dark: #1f6ae0;
+  /* Lighter tint for text: #3786ff on --lp-surface is only 4.1:1. */
+  --lp-accent-text: #6ba5ff;
+  --lp-bg: #202020;
+  --lp-surface: #2a2a2a;
+  --lp-surface-raised: #333333;
+  --lp-border: rgba(255, 255, 255, 0.12);
+  --lp-text: #f5f5f5;
+  --lp-muted: #b9b9b9;
+
+  --lp-radius: 10px;
+  --lp-gap: 30px;
+  --lp-section-padding: 80px;
+}
+
+/* ---------- Base ---------- */
+
+html {
+  background: var(--lp-bg);
+}
+
+body {
+  color: var(--lp-text);
+}
+
+/* The template ships without a visible focus style; restore one for keyboard
+   users without adding an outline on mouse clicks. */
+:focus-visible {
+  outline: 3px solid var(--lp-accent);
+  outline-offset: 2px;
+}
+
+.skip-link {
+  position: absolute;
+  left: -9999px;
+  z-index: 10000;
+  padding: 12px 20px;
+  background: var(--lp-accent);
+  color: #fff;
+  text-decoration: none;
+}
+
+.skip-link:focus {
+  left: 8px;
+  top: 8px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ---------- Layout helpers ---------- */
+
+.section {
+  padding: var(--lp-section-padding) 0;
+}
+
+.section--tight {
+  padding: 40px 0;
+}
+
+.stack-center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+/* The vendored template resets `h1-h6 { margin: 0 }` and
+   `ul, li { list-style: none; padding: 0; margin: 0 }` globally, so long-form
+   text needs its typography restored here. */
+.prose {
+  max-width: 70ch;
+  margin: 0 auto;
+  color: var(--lp-text);
+  font-size: 1.125rem;
+  line-height: 1.7;
+}
+
+.prose > :first-child {
+  margin-top: 0;
+}
+
+.prose > :last-child {
+  margin-bottom: 0;
+}
+
+.prose p {
+  margin: 0 0 1.25em;
+}
+
+.prose h2,
+.prose h3,
+.prose h4 {
+  margin: 2em 0 0.6em;
+  color: #fff;
+  font-weight: 700;
+  line-height: 1.25;
+}
+
+.prose h2 {
+  font-size: 1.75rem;
+}
+
+.prose h3 {
+  font-size: 1.375rem;
+}
+
+.prose h4 {
+  font-size: 1.125rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.prose ul,
+.prose ol {
+  margin: 0 0 1.25em;
+  padding-left: 1.5em;
+}
+
+.prose ul {
+  list-style: disc;
+}
+
+.prose ol {
+  list-style: decimal;
+}
+
+.prose li {
+  margin: 0 0 0.4em;
+  list-style: inherit;
+}
+
+.prose li > ul,
+.prose li > ol {
+  margin: 0.4em 0 0;
+}
+
+.prose blockquote {
+  margin: 1.5em 0;
+  padding: 0.25em 0 0.25em 1.25em;
+  color: var(--lp-muted);
+  border-left: 3px solid var(--lp-accent);
+}
+
+.prose hr {
+  height: 0;
+  margin: 2.5em 0;
+  border: 0;
+  border-top: 1px solid var(--lp-border);
+}
+
+.prose a {
+  color: var(--lp-accent-text);
+}
+
+.prose strong {
+  font-weight: 700;
+}
+
+.prose img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  margin: 1.75em auto;
+  border-radius: var(--lp-radius);
+}
+
+.prose pre {
+  padding: 1rem;
+  margin: 0 0 1.5em;
+  overflow-x: auto;
+  background: #161616;
+  border: 1px solid var(--lp-border);
+  border-radius: var(--lp-radius);
+}
+
+.prose code {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, 'Liberation Mono',
+    'Courier New', monospace;
+  font-size: 0.95em;
+}
+
+/* Inline code and long URLs must wrap, otherwise a single token like
+   `electron . --proxy-server=127.0.0.1:8080` widens the whole page on phones. */
+.prose :not(pre) > code {
+  padding: 0.1em 0.35em;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 4px;
+  overflow-wrap: anywhere;
+}
+
+.prose p,
+.prose li {
+  overflow-wrap: break-word;
+}
+
+.prose table {
+  width: 100%;
+  margin: 0 0 1.5em;
+  border-collapse: collapse;
+}
+
+.prose th,
+.prose td {
+  padding: 0.5rem;
+  border: 1px solid var(--lp-border);
+}
+
+/* ---------- Card grid ---------- */
+
+/* Replaces the .row / .col-lg-4 markup for card lists: it keeps every card in
+   a row the same height without hard-coding pixel heights. */
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: var(--lp-gap);
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow: hidden;
+  background: var(--lp-surface);
+  border: 1px solid var(--lp-border);
+  border-radius: var(--lp-radius);
+  transition:
+    transform 0.25s ease,
+    border-color 0.25s ease;
+}
+
+.card:hover,
+.card:focus-within {
+  transform: translateY(-6px);
+  border-color: var(--lp-accent);
+}
+
+.card__media {
+  position: relative;
+  display: block;
+  overflow: hidden;
+  background: var(--lp-surface-raised);
+}
+
+/* 16:9 window. The ratio is held by a spacer rather than `aspect-ratio` on the
+   wrapper: as a flex item its `min-height: auto` would stretch it back to the
+   intrinsic image height. */
+.card__media::before {
+  content: '';
+  display: block;
+  padding-top: 56.25%;
+}
+
+.card__media img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Square-ish covers (logos, portraits) are centred whole instead of cropped. */
+.card__media--contain img {
+  width: auto;
+  height: auto;
+  max-width: calc(100% - 48px);
+  max-height: calc(100% - 48px);
+  margin: auto;
+  object-fit: unset;
+}
+
+.card__body {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 0.75rem;
+  padding: 20px;
+}
+
+.card__title {
+  margin: 0;
+  font-size: 1.25rem;
+  line-height: 1.3;
+}
+
+.card__title a {
+  color: var(--lp-text);
+  text-decoration: none;
+}
+
+.card__title a:hover,
+.card__title a:focus {
+  color: var(--lp-accent-text);
+}
+
+.card__excerpt {
+  margin: 0;
+  color: var(--lp-muted);
+  font-size: 0.95rem;
+}
+
+.card__meta {
+  margin: 0;
+  color: var(--lp-muted);
+  font-size: 0.875rem;
+}
+
+.card__footer {
+  margin-top: auto;
+  padding-top: 0.5rem;
+}
+
+/* ---------- Tags ---------- */
+
+.tag-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+.tag {
+  display: inline-block;
+  padding: 4px 10px;
+  color: var(--lp-text);
+  font-size: 0.8125rem;
+  text-decoration: none;
+  background: rgba(55, 134, 255, 0.18);
+  border: 1px solid var(--lp-accent);
+  border-radius: 999px;
+}
+
+.tag:hover,
+.tag:focus {
+  color: #fff;
+  background: var(--lp-accent);
+}
+
+/* ---------- Buttons ---------- */
+
+.button-row {
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+}
+
+.button-row > a {
+  display: flex;
+  justify-content: center;
+  width: 14rem;
+}
+
+@media (max-width: 600px) {
+  .button-row {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .button-row > a {
+    width: 100%;
+  }
+}

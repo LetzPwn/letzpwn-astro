@@ -1,128 +1,161 @@
 ---
 import Header from '../components/Header.astro'
 import Footer from '../components/Footer.astro'
-
-import { Breadcrumbs } from 'astro-breadcrumbs'
-
-import 'astro-breadcrumbs/breadcrumbs.css'
 import TagButton from '../components/TagButton.astro'
+import bannerBackground from '../assets/banner-bg.png'
+import type { Tag } from '../lib/posts'
+
+import '../styles/fonts.css'
+import '../styles/site.css'
 
 interface Props {
+  /** Headline shown in the page banner. */
   title: string
-  background?: string
+  /** Overrides the <title> tag when the banner headline is too long/short. */
+  pageTitle?: string
+  /** Small label above the headline. */
   subtitle?: string
+  /** Meta description for search engines and link previews. */
+  description?: string
+  /** Byline or any secondary line under the headline. */
   extra?: string
-  tags?: string[]
+  tags?: Tag[]
+  background?: string
+  /** Absolute or root-relative image used for social link previews. */
+  image?: string
+  /** Set on post pages so link previews are typed as articles. */
+  article?: { publishedTime: string; author?: string }
 }
 
-function getDefaultBackground(bg: string) {
-  return bg || '/assets/images/background/1.png' // Simple example
-}
+const {
+  title,
+  pageTitle,
+  subtitle,
+  description = 'LetzPwn is the first Luxembourgish CTF team: a community that helps people of any age and skill level get into cybersecurity.',
+  extra,
+  tags = [],
+  background = bannerBackground.src,
+  image = '/og-default.png',
+  article
+} = Astro.props
 
-const { title, background, subtitle, extra, tags } = Astro.props
+const SITE_NAME = 'LetzPwn'
+const documentTitle = pageTitle ?? `${title} | ${SITE_NAME}`
 
-const effectiveBackground = getDefaultBackground(background)
-const renderBreadcrumbs = subtitle.length == 0
-
-const baseUrl = Astro.site ?? Astro.url
-const cleanPathname = Astro.url.pathname.replace(/\.html$/, '')
-const defaultCanonicalUrl = new URL(cleanPathname + Astro.url.search, baseUrl)
+const canonicalUrl = new URL(
+  Astro.url.pathname.replace(/\.html$/, ''),
+  Astro.site ?? Astro.url
+)
+const socialImageUrl = new URL(image, Astro.site ?? Astro.url)
 ---
 
 <!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="description" content="Astro description" />
-    <meta name="viewport" content="width=device-width" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="generator" content={Astro.generator} />
+
+    <title>{documentTitle}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonicalUrl} />
+
+    <meta property="og:site_name" content={SITE_NAME} />
+    <meta property="og:type" content={article ? 'article' : 'website'} />
+    <meta property="og:title" content={documentTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:image" content={socialImageUrl} />
+    {
+      article && (
+        <>
+          <meta
+            property="article:published_time"
+            content={article.publishedTime}
+          />
+          {article.author && (
+            <meta property="article:author" content={article.author} />
+          )}
+        </>
+      )
+    }
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content="@LetzPwnAsbl" />
+    <meta name="twitter:title" content={documentTitle} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={socialImageUrl} />
+    <meta name="theme-color" content="#202020" />
+
+    <link rel="icon" href="/favicon.ico" sizes="32x32" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="sitemap" href="/sitemap-index.xml" />
+
+    <!-- The vendored stylesheets are linked in parallel; they used to be
+         chained through @import inside style.css, which serialised them.
+         Webfonts are self-hosted (src/styles/fonts.css) so no request leaves
+         our origin. -->
+    <link
+      rel="preload"
+      href="/assets/fonts/roboto-condensed-400-latin.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
     <link rel="stylesheet" href="/assets/css/bootstrap.css" />
+    <link rel="stylesheet" href="/assets/css/fontawesome-all.css" />
+    <link rel="stylesheet" href="/assets/css/flaticon.css" />
     <link rel="stylesheet" href="/assets/css/style.css" />
     <link rel="stylesheet" href="/assets/css/responsive.css" />
-    <link rel="stylesheet" href="/assets/css/import_custom.css" />
-    <link rel="sitemap" href="/sitemap-index.xml" />
-    <link rel="canonical" href={defaultCanonicalUrl} />
-
-    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
-    <link rel="icon" href="/favicon.ico" type="image/x-icon" />
-
-    <meta name="generator" content={Astro.generator} />
-    <title>LetzPwn - Luxembourgish CTF Team</title>
   </head>
   <body>
+    <a class="skip-link" href="#main-content">Skip to content</a>
     <Header />
     <section
       class="page-banner"
-      style={`background-image: url(${effectiveBackground});`}
+      style={`background-image: url(${background});`}
     >
       <div class="auto-container">
         {
-          !renderBreadcrumbs && (
+          subtitle && (
             <div class="sec-title centered">
               <div class="title">{subtitle}</div>
-            </div>
-          )
-        }
-        {
-          renderBreadcrumbs && (
-            <div class="inner-container clearfix">
-              <div class="bread-crumb clearfix">
-                <Breadcrumbs>
-                  <svg
-                    slot="separator"
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="24"
-                    height="24"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="2"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                  >
-                    <polyline points="9 18 15 12 9 6" />
-                  </svg>
-                </Breadcrumbs>
-              </div>
             </div>
           )
         }
 
         <h1>{title}</h1>
 
-        {extra && <h4>{extra}</h4>}
-        <br />
-        {tags && tags.map((tag) => <TagButton tagName={tag} />)}
+        {extra && <p class="banner-meta">{extra}</p>}
+
+        {
+          tags.length > 0 && (
+            <ul class="tag-list banner-tags">
+              {tags.map((tag) => (
+                <li>
+                  <TagButton tag={tag} />
+                </li>
+              ))}
+            </ul>
+          )
+        }
       </div>
     </section>
-    <slot />
+    <main id="main-content">
+      <slot />
+    </main>
     <Footer />
   </body>
 </html>
-<style is:global>
-  :root {
-    --accent: 136, 58, 234;
-    --accent-light: 224, 204, 250;
-    --accent-dark: 49, 10, 101;
-    --accent-gradient: linear-gradient(
-      45deg,
-      rgb(var(--accent)),
-      rgb(var(--accent-light)) 30%,
-      white 60%
-    );
+
+<style>
+  .banner-meta {
+    margin: 10px 0 0;
+    color: var(--lp-muted);
+    font-size: 1rem;
   }
-  html {
-    font-family: system-ui, sans-serif;
-    background: #13151a;
-  }
-  code {
-    font-family:
-      Menlo,
-      Monaco,
-      Lucida Console,
-      Liberation Mono,
-      DejaVu Sans Mono,
-      Bitstream Vera Sans Mono,
-      Courier New,
-      monospace;
+
+  .banner-tags {
+    justify-content: center;
+    margin-top: 16px;
   }
 </style>

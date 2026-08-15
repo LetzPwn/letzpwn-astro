@@ -44,21 +44,14 @@
 
  ***/
 
-@import url('https://fonts.googleapis.com/css?family=Roboto+Condensed:300,300i,400,400i,700,700i|Special+Elite&display=swap');
-
 /*
 font-family: 'Roboto Condensed', sans-serif;
 
+The @import chain that used to live here (fonts, fontawesome, animate, owl,
+jquery-ui, fancybox, scrollbar, hover) was removed: it serialised the CSS
+downloads. The stylesheets still in use are <link>ed in parallel from
+src/layouts/Layout.astro; the rest were unused and have been deleted.
 */
-
-@import url('fontawesome-all.css');
-@import url('animate.css');
-@import url('flaticon.css');
-@import url('owl.css');
-@import url('jquery-ui.css');
-@import url('jquery.fancybox.min.css');
-@import url('scrollbar.css');
-@import url('hover.css');
 
 /***
 
@@ -551,7 +544,6 @@ figure{
     background-color:rgba(0,0,0,0);
     background-position:center center;
     background-repeat:no-repeat;
-    background-image:url(../images/icons/preloader.svg);
     -webkit-transition: all 200ms ease;
     -moz-transition: all 200ms ease;
     -ms-transition: all 200ms ease;
@@ -2021,7 +2013,6 @@ img{
     text-align: center;
     padding-top: 20px;
     border-bottom: 13px solid #000000;
-    background:url(../images/icons/pagers-curve.png) center top no-repeat;
 }
 
 .banner-section .owl-dots .owl-dot{
@@ -2077,7 +2068,6 @@ img{
     top:0px;
     right:0px;
     height:213px;
-    /*background:url(../images/background/1.png) no-repeat;*/
 }
 
 /* Default Portfolio Item */
@@ -2722,7 +2712,6 @@ img{
     color:#ffffff;
     line-height:1em;
     padding:30px 0px;
-    background:url(../images/background/4.jpg) no-repeat;
     background-size:cover;
 }
 
@@ -2972,7 +2961,6 @@ img{
     line-height:92px;
     text-align:center;
     border:1px solid #302f2f;
-    background:url(../images/background/4.jpg) no-repeat;
     background-size:cover;
     transition: all 0.3s ease;
     -moz-transition: all 0.3s ease;
@@ -3146,7 +3134,7 @@ img{
     top:0px;
     width:20000px;
     height:100%;
-    background:#1b1a1a url(../images/background/7.png) repeat-x;
+    background:#1b1a1a;
 }
 
 .facts-section .lower-boxed .testimonial-column .owl-nav{
@@ -4335,7 +4323,6 @@ img{
     line-height:92px;
     text-align:center;
     border:1px solid #302f2f;
-    background:url(../images/background/4.jpg) no-repeat;
     background-size:cover;
     transition: all 0.3s ease;
     -moz-transition: all 0.3s ease;
@@ -5301,7 +5288,6 @@ img{
     width: 52px;
     height: 57px;
     line-height: 55px;
-    background:url(../images/background/4.jpg) no-repeat;
     background-size:cover;
 }
 

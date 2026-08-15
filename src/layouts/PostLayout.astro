@@ -1,49 +1,31 @@
 ---
 import Layout from './Layout.astro'
+import { COLLECTION_LABELS, formatDate, isoDate, type Post } from '../lib/posts'
 
-const { frontmatter } = Astro.props
-const dateOptions: object = {
-  year: 'numeric',
-  month: 'long',
-  day: 'numeric'
+interface Props {
+  post: Post
 }
 
-const formattedPublishDate = new Date(frontmatter.date).toLocaleDateString(
-  'en-DE',
-  dateOptions
-)
+const { post } = Astro.props
+
+const byline = [post.author, formatDate(post.date)].filter(Boolean).join(' · ')
 ---
 
 <Layout
-  title={frontmatter.title}
-  subtitle="News"
-  extra={`By ${frontmatter.author} - ${formattedPublishDate}`}
-  tags={frontmatter.tags}
+  title={post.title}
+  subtitle={COLLECTION_LABELS[post.collection]}
+  description={post.excerpt ??
+    `${COLLECTION_LABELS[post.collection]} from LetzPwn: ${post.title}.`}
+  extra={byline}
+  tags={post.tags}
+  image={post.cover.src}
+  article={{ publishedTime: isoDate(post.date), author: post.author }}
 >
-  <div class="content-container">
-    <article class="main-content">
-      <br />
-      <main>
+  <article class="section">
+    <div class="auto-container">
+      <div class="prose">
         <slot />
-      </main>
-    </article>
-  </div>
+      </div>
+    </div>
+  </article>
 </Layout>
-
-<style>
-  .content-container {
-    padding: 3vh 10vw;
-    color: white;
-    gap: 20px; /* Spacing between main content and sidebar */
-    text-align: justify;
-  }
-
-  p {
-    color: white;
-  }
-
-  .main-content {
-    flex: 2; /* Takes up 2/3 of the container */
-    color: white;
-  }
-</style>

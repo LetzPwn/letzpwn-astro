@@ -1,59 +1,29 @@
 ---
-import { getAllTags } from '../../utils/content'
 import Layout from '../../layouts/Layout.astro'
-import PostMini from '../../components/PostMini.astro'
-import type { Props as PostMiniProps } from '../../components/PostMini.astro'
+import PostCard from '../../components/PostCard.astro'
+import { getPosts } from '../../lib/posts'
 
-const images = import.meta.glob<{ default: string }>('/src/content/writeups/**/*.{png,jpg,jpeg}', { eager: true });
-const writedups = import.meta.glob('../../content/writeups/*.mdx', { eager: true})
-const posts: PostMiniProps[] = Object.entries(writedups).map(
-  ([path, module]) => {
-    const mod = module as { frontmatter: PostMiniProps } // Use type assertion
-    const slug = path.split('/').pop()?.replace('.mdx', '') || ''
-
-    // Ensure the date is properly formatted as a string before passing it
-    const rawDate = mod.frontmatter.date
-    const parsedDate = rawDate ? new Date(`${rawDate}T00:00:00Z`) : null;
-    const coverImage = images[`/src/content/writeups/${mod.frontmatter.coverImagePath}`]?.default || images[`/src/content/writeups/img/logo.png`]?.default;
-
-    return {
-      title: mod.frontmatter.title,
-      coverImagePath: coverImage,
-      tags: mod.frontmatter.tags,
-      author: mod.frontmatter.author,
-      date: (parsedDate && !isNaN(parsedDate.getTime())) 
-        ? parsedDate.toISOString().split('T')[0]  // Convert back to 'YYYY-MM-DD' string
-        : 'Unknown',  // Fallback in case of an invalid date
-      excerpt: mod.frontmatter.excerpt,
-      url: '/writeups/' + slug
-    }
-  }
-).filter(post => post.date !== 'Unknown') // Remove posts with invalid dates
-.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()) // Sort by newest first
-
-const tags = getAllTags()
+const posts = await getPosts('writeups')
 ---
 
-<Layout title="Writeups" subtitle="Writeups">
-  <main>
-    <section class="players-section players-page-section">
-      <div class="auto-container">
-        <div class="row clearfix">
-          {
-            posts.map((post) => (
-              <PostMini
-                title={post.title}
-                url={post.url}
-                excerpt={post.excerpt}
-                coverImagePath={post.coverImagePath}
-                tags={tags}
-                author={post.author}
-                date={post.date}
-              />
-            ))
-          }
-        </div>
-      </div>
-    </section>
-  </main>
+<Layout
+  title="Writeups"
+  subtitle="Writeups"
+  description="CTF challenge writeups published by members of LetzPwn."
+>
+  <section class="section">
+    <div class="auto-container">
+      {
+        posts.length > 0 ? (
+          <ul class="card-grid">
+            {posts.map((post, index) => (
+              <PostCard post={post} eager={index < 3} />
+            ))}
+          </ul>
+        ) : (
+          <p>No writeups yet.</p>
+        )
+      }
+    </div>
+  </section>
 </Layout>
