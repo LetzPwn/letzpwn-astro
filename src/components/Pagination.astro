@@ -47,12 +47,22 @@ const hrefFor = (page: number) =>
 }
 
 <style>
+  /* Three tracks so the page counter stays centred whether or not both
+     buttons are present. */
   .pagination {
-    display: flex;
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
     gap: 1.5rem;
     align-items: center;
-    justify-content: center;
     margin-top: 3rem;
+  }
+
+  .pagination > :first-child {
+    justify-self: end;
+  }
+
+  .pagination > :last-child {
+    justify-self: start;
   }
 
   .page-count {
