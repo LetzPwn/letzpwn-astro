@@ -1,6 +1,6 @@
 ---
 interface Props {
-  /** Listing root, e.g. "/news". Page 1 lives there, page 2+ at /news/2. */
+  /** Listing root, e.g. "/news". Page 1 lives there, page 2+ at /news/page/2. */
   basePath: string
   currentPage: number
   lastPage: number
@@ -9,7 +9,7 @@ interface Props {
 const { basePath, currentPage, lastPage } = Astro.props
 
 const hrefFor = (page: number) =>
-  page === 1 ? basePath : `${basePath}/${page}`
+  page === 1 ? basePath : `${basePath}/page/${page}`
 ---
 
 {

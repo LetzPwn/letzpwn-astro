@@ -47,7 +47,10 @@ function toPost(entry: CollectionEntry<PostCollection>): Post {
     id: entry.id,
     url: `/${collection}/${entry.id}`,
     title: entry.data.title,
-    date: entry.data.date,
+    // The content layer persists entries to .astro/data-store.json, and a warm
+    // store hands the date back as an ISO string rather than a Date. Coerce
+    // here so nothing downstream has to care which one it got.
+    date: new Date(entry.data.date),
     author: entry.data.author,
     excerpt: entry.data.excerpt,
     tags: entry.data.tags.map(toTag),

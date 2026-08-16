@@ -1,13 +1,13 @@
 ---
-import Layout from '../../layouts/Layout.astro'
-import PostCard from '../../components/PostCard.astro'
-import Pagination from '../../components/Pagination.astro'
-import { getPosts, POSTS_PER_PAGE, type Post } from '../../lib/posts'
+import Layout from '../../../layouts/Layout.astro'
+import PostCard from '../../../components/PostCard.astro'
+import Pagination from '../../../components/Pagination.astro'
+import { getPosts, POSTS_PER_PAGE, type Post } from '../../../lib/posts'
 
 // Page 1 is served by index.astro, so only pages 2..n are generated here.
 // Post slugs are date-prefixed file names, so they never collide with a number.
 export async function getStaticPaths() {
-  const posts = await getPosts('writeups')
+  const posts = await getPosts('news')
   const lastPage = Math.ceil(posts.length / POSTS_PER_PAGE)
 
   return Array.from({ length: Math.max(0, lastPage - 1) }, (_, index) => {
@@ -33,10 +33,10 @@ const { posts, currentPage, lastPage } = Astro.props
 ---
 
 <Layout
-  title="Writeups"
-  pageTitle={`Writeups — page ${currentPage} | LetzPwn`}
-  subtitle="Writeups"
-  description="CTF challenge writeups published by members of LetzPwn."
+  title="Latest News"
+  pageTitle={`News — page ${currentPage} | LetzPwn`}
+  subtitle="News"
+  description="News and announcements from LetzPwn, the first Luxembourgish CTF team."
 >
   <section class="section">
     <div class="auto-container">
@@ -44,7 +44,7 @@ const { posts, currentPage, lastPage } = Astro.props
         {posts.map((post, index) => <PostCard post={post} eager={index < 3} />)}
       </ul>
       <Pagination
-        basePath="/writeups"
+        basePath="/news"
         currentPage={currentPage}
         lastPage={lastPage}
       />
