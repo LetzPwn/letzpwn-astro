@@ -1,0 +1,62 @@
+---
+interface Props {
+  /** Listing root, e.g. "/news". Page 1 lives there, page 2+ at /news/2. */
+  basePath: string
+  currentPage: number
+  lastPage: number
+}
+
+const { basePath, currentPage, lastPage } = Astro.props
+
+const hrefFor = (page: number) =>
+  page === 1 ? basePath : `${basePath}/${page}`
+---
+
+{
+  lastPage > 1 && (
+    <nav class="pagination" aria-label="Pagination">
+      {currentPage > 1 ? (
+        <a
+          class="theme-btn btn-style-one"
+          href={hrefFor(currentPage - 1)}
+          rel="prev"
+        >
+          <span class="btn-title">← Newer</span>
+        </a>
+      ) : (
+        <span />
+      )}
+
+      <span class="page-count">
+        Page {currentPage} of {lastPage}
+      </span>
+
+      {currentPage < lastPage ? (
+        <a
+          class="theme-btn btn-style-one"
+          href={hrefFor(currentPage + 1)}
+          rel="next"
+        >
+          <span class="btn-title">Older →</span>
+        </a>
+      ) : (
+        <span />
+      )}
+    </nav>
+  )
+}
+
+<style>
+  .pagination {
+    display: flex;
+    gap: 1.5rem;
+    align-items: center;
+    justify-content: center;
+    margin-top: 3rem;
+  }
+
+  .page-count {
+    color: var(--lp-muted);
+    font-size: 1rem;
+  }
+</style>

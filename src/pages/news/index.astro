@@ -1,9 +1,12 @@
 ---
 import Layout from '../../layouts/Layout.astro'
 import PostCard from '../../components/PostCard.astro'
-import { getPosts } from '../../lib/posts'
+import Pagination from '../../components/Pagination.astro'
+import { getPosts, POSTS_PER_PAGE } from '../../lib/posts'
 
-const posts = await getPosts('news')
+const allPosts = await getPosts('news')
+const posts = allPosts.slice(0, POSTS_PER_PAGE)
+const lastPage = Math.max(1, Math.ceil(allPosts.length / POSTS_PER_PAGE))
 ---
 
 <Layout
@@ -21,9 +24,10 @@ const posts = await getPosts('news')
             ))}
           </ul>
         ) : (
-          <p>No news posts yet.</p>
+          <p>Nothing published yet.</p>
         )
       }
+      <Pagination basePath="/news" currentPage={1} lastPage={lastPage} />
     </div>
   </section>
 </Layout>

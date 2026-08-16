@@ -89,6 +89,12 @@ const socialImageUrl = new URL(image, Astro.site ?? Astro.url)
     <link rel="icon" href="/favicon.ico" sizes="32x32" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <link rel="sitemap" href="/sitemap-index.xml" />
+    <link
+      rel="alternate"
+      type="application/rss+xml"
+      title="LetzPwn — news and writeups"
+      href="/rss.xml"
+    />
 
     <!-- The vendored stylesheets are linked in parallel; they used to be
          chained through @import inside style.css, which serialised them.

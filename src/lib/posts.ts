@@ -4,6 +4,9 @@ import { slugify } from './slugify'
 
 export type PostCollection = 'news' | 'writeups'
 
+/** Cards per page on the news and writeups listings. */
+export const POSTS_PER_PAGE = 9
+
 export interface Tag {
   /** As written in the frontmatter, e.g. "Post Mortem" */
   name: string
