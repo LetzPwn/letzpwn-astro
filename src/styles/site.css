@@ -192,7 +192,8 @@ body {
 }
 
 .prose code {
-  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, 'Liberation Mono',
+  font-family:
+    ui-monospace, SFMono-Regular, Menlo, Monaco, 'Liberation Mono',
     'Courier New', monospace;
   font-size: 0.95em;
 }
