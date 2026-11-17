@@ -14,7 +14,7 @@
     "preview": "astro preview",
     "prepare": "husky",
     "astro": "astro",
-    "lint": "eslint . --ext .js,.cjs,.ts",
+    "lint": "eslint .",
     "prettier:check": "prettier --cache --check .",
     "format": "prettier --cache --write ."
   },
@@ -27,15 +27,16 @@
   },
   "devDependencies": {
     "@astrojs/check": "^0.9.12",
+    "@eslint/js": "^10.0.1",
     "@types/node": "^26.6.6",
-    "@typescript-eslint/eslint-plugin": "^8.72.2",
-    "@typescript-eslint/parser": "^8.8.0",
     "eslint": "^10.15.0",
+    "globals": "^17.14.0",
     "husky": "^9.1.7",
     "lint-staged": "^17.6.0",
     "prettier": "^3.10.1",
     "prettier-plugin-astro": "^1.1.2",
-    "typescript": "~6.0.3"
+    "typescript": "~6.0.3",
+    "typescript-eslint": "^8.73.0"
   },
   "lint-staged": {
     "*.{astro,ts,js,cjs,mjs,json,md,mdx,css}": "prettier --write"

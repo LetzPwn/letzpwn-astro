@@ -40,7 +40,7 @@ export function toTag(name: string): Tag {
 }
 
 function toPost(entry: CollectionEntry<PostCollection>): Post {
-  const collection = entry.collection as PostCollection
+  const collection = entry.collection
 
   return {
     collection,
