@@ -31,7 +31,10 @@ const latestWriteups = writeups.slice(0, 3)
           points. The team with the most points wins, easy right? If you want to
           know more details about how CTFs work, feel free to contact us or do
           some internet research. A good entry point for your research might be
-          <a href="https://ctftime.org/ctf-wtf/" rel="noopener">this site</a>.
+          <a href="https://ctftime.org/ctf-wtf/" rel="noopener">
+            this site
+          </a>
+          .
         </p>
         <p>
           Our main platform for the community is Discord, it's free and easy to
@@ -61,17 +64,15 @@ const latestWriteups = writeups.slice(0, 3)
       <div class="sec-title centered">
         <h2>Latest News</h2>
       </div>
-      {
-        latestNews.length > 0 ? (
-          <ul class="card-grid">
-            {latestNews.map((post, index) => (
-              <PostCard post={post} eager={index === 0} />
-            ))}
-          </ul>
-        ) : (
-          <p class="empty">No news posts yet.</p>
-        )
-      }
+      {latestNews.length > 0 ? (
+        <ul class="card-grid">
+          {latestNews.map((post, index) => (
+            <PostCard post={post} eager={index === 0} />
+          ))}
+        </ul>
+      ) : (
+        <p class="empty">No news posts yet.</p>
+      )}
       <div class="stack-center more">
         <a href="/news" class="theme-btn btn-style-one">
           <span class="btn-title">More news</span>
@@ -85,17 +86,15 @@ const latestWriteups = writeups.slice(0, 3)
       <div class="sec-title centered">
         <h2>Latest Writeups</h2>
       </div>
-      {
-        latestWriteups.length > 0 ? (
-          <ul class="card-grid">
-            {latestWriteups.map((post) => (
-              <PostCard post={post} />
-            ))}
-          </ul>
-        ) : (
-          <p class="empty">No writeups yet.</p>
-        )
-      }
+      {latestWriteups.length > 0 ? (
+        <ul class="card-grid">
+          {latestWriteups.map((post) => (
+            <PostCard post={post} />
+          ))}
+        </ul>
+      ) : (
+        <p class="empty">No writeups yet.</p>
+      )}
       <div class="stack-center more">
         <a href="/writeups" class="theme-btn btn-style-one">
           <span class="btn-title">More writeups</span>

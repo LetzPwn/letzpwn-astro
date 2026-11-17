@@ -12,21 +12,19 @@ const tags = await getTagsWithPosts()
 >
   <section class="section">
     <div class="auto-container">
-      {
-        tags.length > 0 ? (
-          <ul class="tag-list tag-index">
-            {tags.map((tag) => (
-              <li>
-                <a class="tag" href={tag.url}>
-                  {tag.name} <span class="count">({tag.posts.length})</span>
-                </a>
-              </li>
-            ))}
-          </ul>
-        ) : (
-          <p>No tags yet.</p>
-        )
-      }
+      {tags.length > 0 ? (
+        <ul class="tag-list tag-index">
+          {tags.map((tag) => (
+            <li>
+              <a class="tag" href={tag.url}>
+                {tag.name} <span class="count">({tag.posts.length})</span>
+              </a>
+            </li>
+          ))}
+        </ul>
+      ) : (
+        <p>No tags yet.</p>
+      )}
     </div>
   </section>
 </Layout>

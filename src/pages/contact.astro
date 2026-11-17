@@ -43,24 +43,19 @@ const channels = [
       </p>
 
       <ul class="channels">
-        {
-          channels.map((channel) => (
-            <li class="channel">
-              <span
-                class={`channel__icon ${channel.icon}`}
-                aria-hidden="true"
-              />
-              <a
-                class="channel__link"
-                href={channel.href}
-                rel={channel.external ? 'noopener external' : undefined}
-                target={channel.external ? '_blank' : undefined}
-              >
-                {channel.label}
-              </a>
-            </li>
-          ))
-        }
+        {channels.map((channel) => (
+          <li class="channel">
+            <span class={`channel__icon ${channel.icon}`} aria-hidden="true" />
+            <a
+              class="channel__link"
+              href={channel.href}
+              rel={channel.external ? 'noopener external' : undefined}
+              target={channel.external ? '_blank' : undefined}
+            >
+              {channel.label}
+            </a>
+          </li>
+        ))}
       </ul>
     </div>
   </section>

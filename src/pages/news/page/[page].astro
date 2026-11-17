@@ -41,7 +41,9 @@ const { posts, currentPage, lastPage } = Astro.props
   <section class="section">
     <div class="auto-container">
       <ul class="card-grid">
-        {posts.map((post, index) => <PostCard post={post} eager={index < 3} />)}
+        {posts.map((post, index) => (
+          <PostCard post={post} eager={index < 3} />
+        ))}
       </ul>
       <Pagination
         basePath="/news"

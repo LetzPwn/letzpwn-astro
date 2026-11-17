@@ -16,7 +16,7 @@ jobs:
         id: metadata
         uses: dependabot/fetch-metadata@v3
         with:
-          github-token: "${{ secrets.GITHUB_TOKEN }}"
+          github-token: '${{ secrets.GITHUB_TOKEN }}'
 
       - name: Merge src/content submodule update
         if: steps.metadata.outputs.package-ecosystem == 'gitsubmodule'

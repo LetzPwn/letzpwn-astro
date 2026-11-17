@@ -20,7 +20,9 @@ const { name, pseudo, role, image = defaultAvatar } = Astro.props
     <h3 class="card__title">{name}</h3>
     <p class="member__pseudo">{pseudo}</p>
     {role && <p class="member__role">{role}</p>}
-    <p class="member__blurb"><slot /></p>
+    <p class="member__blurb">
+      <slot />
+    </p>
   </div>
 </li>
 

@@ -16,17 +16,15 @@ const lastPage = Math.max(1, Math.ceil(allPosts.length / POSTS_PER_PAGE))
 >
   <section class="section">
     <div class="auto-container">
-      {
-        posts.length > 0 ? (
-          <ul class="card-grid">
-            {posts.map((post, index) => (
-              <PostCard post={post} eager={index < 3} />
-            ))}
-          </ul>
-        ) : (
-          <p>Nothing published yet.</p>
-        )
-      }
+      {posts.length > 0 ? (
+        <ul class="card-grid">
+          {posts.map((post, index) => (
+            <PostCard post={post} eager={index < 3} />
+          ))}
+        </ul>
+      ) : (
+        <p>Nothing published yet.</p>
+      )}
       <Pagination basePath="/writeups" currentPage={1} lastPage={lastPage} />
     </div>
   </section>

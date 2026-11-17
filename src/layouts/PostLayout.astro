@@ -14,8 +14,10 @@ const byline = [post.author, formatDate(post.date)].filter(Boolean).join(' · ')
 <Layout
   title={post.title}
   subtitle={COLLECTION_LABELS[post.collection]}
-  description={post.excerpt ??
-    `${COLLECTION_LABELS[post.collection]} from LetzPwn: ${post.title}.`}
+  description={
+    post.excerpt ??
+    `${COLLECTION_LABELS[post.collection]} from LetzPwn: ${post.title}.`
+  }
   extra={byline}
   tags={post.tags}
   image={post.cover.src}

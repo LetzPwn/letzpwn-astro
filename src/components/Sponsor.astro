@@ -17,9 +17,13 @@ const { name, logoPath, url, twitter } = Astro.props
   </div>
   <div class="card__body">
     <h3 class="card__title">
-      <a href={url} rel="noopener external" target="_blank">{name}</a>
+      <a href={url} rel="noopener external" target="_blank">
+        {name}
+      </a>
     </h3>
-    <p class="card__excerpt"><slot /></p>
+    <p class="card__excerpt">
+      <slot />
+    </p>
     <ul class="sponsor__links card__footer">
       <li>
         <a href={url} rel="noopener external" target="_blank">
@@ -27,20 +31,18 @@ const { name, logoPath, url, twitter } = Astro.props
           <span class="sr-only">{name} website</span>
         </a>
       </li>
-      {
-        twitter && (
-          <li>
-            <a
-              href={`https://twitter.com/${twitter}`}
-              rel="noopener external"
-              target="_blank"
-            >
-              <span class="fab fa-twitter" aria-hidden="true" />
-              <span class="sr-only">{name} on Twitter</span>
-            </a>
-          </li>
-        )
-      }
+      {twitter && (
+        <li>
+          <a
+            href={`https://twitter.com/${twitter}`}
+            rel="noopener external"
+            target="_blank"
+          >
+            <span class="fab fa-twitter" aria-hidden="true" />
+            <span class="sr-only">{name} on Twitter</span>
+          </a>
+        </li>
+      )}
     </ul>
   </div>
 </li>

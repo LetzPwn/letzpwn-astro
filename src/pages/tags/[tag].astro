@@ -24,13 +24,13 @@ const { tag } = Astro.props
   <section class="section">
     <div class="auto-container">
       <ul class="card-grid">
-        {
-          tag.posts.map((post, index) => (
-            <PostCard post={post} eager={index < 3} />
-          ))
-        }
+        {tag.posts.map((post, index) => (
+          <PostCard post={post} eager={index < 3} />
+        ))}
       </ul>
-      <p class="back"><a href="/tags">← All tags</a></p>
+      <p class="back">
+        <a href="/tags">← All tags</a>
+      </p>
     </div>
   </section>
 </Layout>

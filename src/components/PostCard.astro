@@ -33,22 +33,22 @@ const isWideCover = post.cover.width / post.cover.height >= 1.4
     />
   </a>
   <div class="card__body">
-    <h3 class="card__title"><a href={post.url}>{post.title}</a></h3>
+    <h3 class="card__title">
+      <a href={post.url}>{post.title}</a>
+    </h3>
     {post.excerpt && <p class="card__excerpt">{post.excerpt}</p>}
     <p class="card__meta">
       {post.author && <span>{post.author} · </span>}
       <time datetime={isoDate(post.date)}>{formatDate(post.date)}</time>
     </p>
-    {
-      post.tags.length > 0 && (
-        <ul class="tag-list card__footer">
-          {post.tags.map((tag) => (
-            <li>
-              <TagButton tag={tag} />
-            </li>
-          ))}
-        </ul>
-      )
-    }
+    {post.tags.length > 0 && (
+      <ul class="tag-list card__footer">
+        {post.tags.map((tag) => (
+          <li>
+            <TagButton tag={tag} />
+          </li>
+        ))}
+      </ul>
+    )}
   </div>
 </li>

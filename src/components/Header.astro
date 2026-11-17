@@ -29,19 +29,17 @@ const navGroups = [
 
       <div class="top-right">
         <ul class="social-icons">
-          {
-            SOCIAL_LINKS.map((social) => (
-              <li>
-                <a
-                  href={social.url}
-                  rel="noopener me"
-                  aria-label={`${SITE_NAME} on ${social.name}`}
-                >
-                  <span class={social.icon} aria-hidden="true" />
-                </a>
-              </li>
-            ))
-          }
+          {SOCIAL_LINKS.map((social) => (
+            <li>
+              <a
+                href={social.url}
+                rel="noopener me"
+                aria-label={`${SITE_NAME} on ${social.name}`}
+              >
+                <span class={social.icon} aria-hidden="true" />
+              </a>
+            </li>
+          ))}
         </ul>
       </div>
     </div>
@@ -78,30 +76,24 @@ const navGroups = [
 
           <nav class="main-menu" aria-label="Main">
             <div class="navbar-collapse clearfix">
-              {
-                navGroups.map((group) => (
-                  <ul class={`navigation clearfix ${group.align}`}>
-                    {group.items.map((item) => (
-                      <li
-                        class={
-                          isActive(currentPath, item.path) ? 'current' : ''
+              {navGroups.map((group) => (
+                <ul class={`navigation clearfix ${group.align}`}>
+                  {group.items.map((item) => (
+                    <li
+                      class={isActive(currentPath, item.path) ? 'current' : ''}
+                    >
+                      <a
+                        href={item.path}
+                        aria-current={
+                          isActive(currentPath, item.path) ? 'page' : undefined
                         }
                       >
-                        <a
-                          href={item.path}
-                          aria-current={
-                            isActive(currentPath, item.path)
-                              ? 'page'
-                              : undefined
-                          }
-                        >
-                          {item.name}
-                        </a>
-                      </li>
-                    ))}
-                  </ul>
-                ))
-              }
+                        {item.name}
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              ))}
             </div>
           </nav>
         </div>
@@ -125,36 +117,32 @@ const navGroups = [
       </div>
 
       <ul class="drawer__nav">
-        {
-          NAV_ITEMS.map((item) => (
-            <li>
-              <a
-                href={item.path}
-                aria-current={
-                  isActive(currentPath, item.path) ? 'page' : undefined
-                }
-              >
-                {item.name}
-              </a>
-            </li>
-          ))
-        }
+        {NAV_ITEMS.map((item) => (
+          <li>
+            <a
+              href={item.path}
+              aria-current={
+                isActive(currentPath, item.path) ? 'page' : undefined
+              }
+            >
+              {item.name}
+            </a>
+          </li>
+        ))}
       </ul>
 
       <ul class="drawer__socials">
-        {
-          SOCIAL_LINKS.map((social) => (
-            <li>
-              <a
-                href={social.url}
-                rel="noopener me"
-                aria-label={`${SITE_NAME} on ${social.name}`}
-              >
-                <span class={social.icon} aria-hidden="true" />
-              </a>
-            </li>
-          ))
-        }
+        {SOCIAL_LINKS.map((social) => (
+          <li>
+            <a
+              href={social.url}
+              rel="noopener me"
+              aria-label={`${SITE_NAME} on ${social.name}`}
+            >
+              <span class={social.icon} aria-hidden="true" />
+            </a>
+          </li>
+        ))}
       </ul>
     </nav>
   </div>

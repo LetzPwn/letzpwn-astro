@@ -40,13 +40,11 @@ const year = new Date().getFullYear()
                 <h2>Links</h2>
               </div>
               <ul class="list footer-links">
-                {
-                  FOOTER_LINKS.map((link) => (
-                    <li>
-                      <a href={link.path}>{link.name}</a>
-                    </li>
-                  ))
-                }
+                {FOOTER_LINKS.map((link) => (
+                  <li>
+                    <a href={link.path}>{link.name}</a>
+                  </li>
+                ))}
               </ul>
             </div>
           </nav>
@@ -97,19 +95,17 @@ const year = new Date().getFullYear()
         </div>
         <div class="column col-lg-6 col-md-12 col-sm-12">
           <ul class="social-icons">
-            {
-              SOCIAL_LINKS.map((social) => (
-                <li>
-                  <a
-                    href={social.url}
-                    rel="noopener me"
-                    aria-label={`${SITE_NAME} on ${social.name}`}
-                  >
-                    <span class={social.icon} aria-hidden="true" />
-                  </a>
-                </li>
-              ))
-            }
+            {SOCIAL_LINKS.map((social) => (
+              <li>
+                <a
+                  href={social.url}
+                  rel="noopener me"
+                  aria-label={`${SITE_NAME} on ${social.name}`}
+                >
+                  <span class={social.icon} aria-hidden="true" />
+                </a>
+              </li>
+            ))}
           </ul>
         </div>
       </div>

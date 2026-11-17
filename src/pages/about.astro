@@ -112,20 +112,18 @@ const board = [
         <h2>Our goals</h2>
       </div>
       <ul class="goal-grid">
-        {
-          goals.map((goal) => (
-            <li class="goal">
-              <span class={`goal__icon ${goal.icon}`} aria-hidden="true" />
-              <h3 class="goal__title">{goal.title}</h3>
-              <p class="goal__text">{goal.text}</p>
-              {goal.link && (
-                <a class="goal__link" href={goal.link.href}>
-                  {goal.link.label}
-                </a>
-              )}
-            </li>
-          ))
-        }
+        {goals.map((goal) => (
+          <li class="goal">
+            <span class={`goal__icon ${goal.icon}`} aria-hidden="true" />
+            <h3 class="goal__title">{goal.title}</h3>
+            <p class="goal__text">{goal.text}</p>
+            {goal.link && (
+              <a class="goal__link" href={goal.link.href}>
+                {goal.link.label}
+              </a>
+            )}
+          </li>
+        ))}
       </ul>
     </div>
   </section>
@@ -136,17 +134,15 @@ const board = [
         <h2>Board &amp; Founders</h2>
       </div>
       <ul class="card-grid">
-        {
-          board.map((member) => (
-            <TeamMember
-              name={member.name}
-              pseudo={member.pseudo}
-              role={member.role}
-            >
-              {member.blurb}
-            </TeamMember>
-          ))
-        }
+        {board.map((member) => (
+          <TeamMember
+            name={member.name}
+            pseudo={member.pseudo}
+            role={member.role}
+          >
+            {member.blurb}
+          </TeamMember>
+        ))}
       </ul>
     </div>
   </section>
